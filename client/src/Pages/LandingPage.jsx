@@ -91,7 +91,7 @@ const Home = () => {
 
       {/* Header */}
       <header className="max-w-7xl mx-auto flex justify-between items-center py-8 px-4 sm:px-6 md:px-20" data-aos="fade-down">
-        <Link to="/login"><h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8]">Refixly</h1></Link>
+        <Link to="/"><h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8]">Refixly</h1></Link>
         <nav>
           <ul className="hidden md:flex space-x-6 text-sm sm:text-base">
             <li><a href="#how-it-works" className="hover:text-[#0EA5E9] transition">How It Works</a></li>
