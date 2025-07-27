@@ -1,0 +1,33 @@
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { GraduationCap } from "lucide-react";
+
+export default function LearningResources() {
+  const openCoursera = () => {
+    window.open("https://www.coursera.org/learn/ai-for-medical-diagnosis", "_blank");
+  };
+
+  const openUdemy = () => {
+    window.open("https://www.udemy.com/course/the-ai-engineer-course-complete-ai-engineer-bootcamp/?couponCode=KEEPLEARNING", "_blank");
+  };
+
+  return (
+    <div className="grid gap-4 md:grid-cols-2 p-6">
+      <Button
+        onClick={openCoursera}
+        className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-6 py-3 rounded-2xl shadow-lg flex items-center gap-2 w-full"
+      >
+        <GraduationCap className="w-5 h-5" />
+        Coursera: AI for Medical Diagnosis
+      </Button>
+
+      <Button
+        onClick={openUdemy}
+        className="bg-green-600 hover:bg-green-700 text-white text-lg px-6 py-3 rounded-2xl shadow-lg flex items-center gap-2 w-full"
+      >
+        <GraduationCap className="w-5 h-5" />
+        Udemy: AI Engineer Bootcamp
+      </Button>
+    </div>
+  );
+}
