@@ -5,12 +5,15 @@ import { auth, provider } from '../firebase';
 import { signInWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
 import { FaUser, FaLock, FaGoogle, FaEye, FaEyeSlash } from 'react-icons/fa';
 import authBg from '../assets/auth-bg.png';
+import toast from 'react-hot-toast'
+import { Loader2 } from 'lucide-react'
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -18,35 +21,39 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert('Login Successful!');
+      toast.success("Login Successful!")
       navigate('/home');
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message)
+    } finally {
+      setIsLoading(false)
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, provider);
-      alert('Google login successful!');
+      toast.success("Google login successful!")
       navigate('/home');
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message)
     }
   };
 
   const handleForgotPassword = async () => {
     if (!email) {
-      alert('Please enter your email address first.');
+      toast("Please enter your email address")
       return;
     }
     try {
       await sendPasswordResetEmail(auth, email);
-      alert('Password reset email sent! Please check your inbox.');
+      toast.success("Password reset email sent! Please check your inbox.")
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message)
     }
   };
 
@@ -107,7 +114,12 @@ const Login = () => {
           </div>
 
           <button type="submit" className="w-full py-3 bg-gray-800 text-white font-semibold rounded-full hover:bg-gray-900">
-            Login
+            {isLoading ?
+              <span className=' flex justify-center items-center'>
+                <Loader2 className='animate-spin' />
+              </span>
+              :
+              <span>Login</span>}
           </button>
 
           <button

@@ -5,43 +5,18 @@ import 'aos/dist/aos.css';
 import '../index.css';
 import ScrollToTop from '../components/ScrollTop';
 import { FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import Tour from '../components/Tour';
+import FAQAccordion from '../components/FAQAccordion';
 
-const FAQAccordion = ({ faqs }) => {
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggle = (i) => {
-    setOpenIndex(openIndex === i ? null : i);
-  };
-
-  return (
-    <div className="max-w-4xl mx-auto space-y-4">
-      {faqs.map(({ q, a }, i) => (
-        <div
-          key={i}
-          className={`bg-[#334155] rounded-2xl shadow-lg cursor-pointer select-none ${
-            openIndex === i ? 'faq-glow' : ''
-          }`}
-          onClick={() => toggle(i)}
-          aria-expanded={openIndex === i}
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') toggle(i);
-          }}
-        >
-          <div className="flex justify-between items-center p-6">
-            <h3 className="text-xl font-semibold">{q}</h3>
-            <span className="text-[#38BDF8] text-2xl">{openIndex === i ? '−' : '+'}</span>
-          </div>
-          {openIndex === i && (
-            <p className="px-6 pb-6 text-[#CBD5E1] border-t border-[#38BDF8]">{a}</p>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-};
 
 const Home = () => {
+  const [showTour, setShowTour] = useState(false);
+
+  useEffect(() => {
+    // Always show the tour after DOM is ready
+    setTimeout(() => setShowTour(true), 300);
+  }, []);
+
   useEffect(() => {
     AOS.init({
       duration: 1200,
@@ -82,6 +57,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-[#0F172A] via-[#1E293B] to-[#334155] text-white font-sans overflow-x-hidden">
+      {showTour && <Tour onClose={() => setShowTour(false)} auto={true} />}
       <style>{`
         .faq-glow {
           box-shadow: 0 0 12px 3px #38BDF8;
@@ -90,21 +66,24 @@ const Home = () => {
       `}</style>
 
       {/* Header */}
-      <header className="max-w-7xl mx-auto flex justify-between items-center py-8 px-4 sm:px-6 md:px-20" data-aos="fade-down">
-        <Link to="/"><h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8]">Refixly</h1></Link>
-        <nav>
-          <ul className="hidden md:flex space-x-6 text-sm sm:text-base">
-            <li><a href="#how-it-works" className="hover:text-[#0EA5E9] transition">How It Works</a></li>
-            <li><a href="#features" className="hover:text-[#0EA5E9] transition">What Refixly Can Do</a></li>
-            <li><a href="#faq" className="hover:text-[#0EA5E9] transition">FAQ</a></li>
-            <li><a href="#ready" className="hover:text-[#0EA5E9] transition">Ready to Fix?</a></li>
-            <li><Link to="/signup" className="hover:text-[#0EA5E9] transition">SignUp</Link></li>
-          </ul>
-        </nav>
-      </header>
+    <header className="max-w-7xl mx-auto flex justify-between items-center py-8 px-4 sm:px-6 md:px-20" data-aos="fade-down">
+  <Link to="/login">
+    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8] tour-step-1">Refixly</h1>
+  </Link>
+  <nav className="tour-step-navbar">
+    <ul className="hidden md:flex space-x-6 text-sm sm:text-base">
+      <li><a href="#how-it-works" className="hover:text-[#0EA5E9] transition">How It Works</a></li>
+      <li><a href="#features" className="hover:text-[#0EA5E9] transition">What Refixly Can Do</a></li>
+      <li><a href="#faq" className="hover:text-[#0EA5E9] transition">FAQ</a></li>
+      <li><a href="#ready" className="hover:text-[#0EA5E9] transition">Ready to Fix?</a></li>
+      <li><Link to="/signup" className="hover:text-[#0EA5E9] transition tour-step-2">SignUp</Link></li>
+    </ul>
+   </nav>
+    </header>
+
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-16 text-center md:text-left" data-aos="fade-up">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-16 text-center md:text-left tour-step-3" data-aos="fade-up">
         <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-10">
           <div className="flex-1 max-w-xl">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
@@ -131,7 +110,7 @@ const Home = () => {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20" data-aos="fade-right">
+      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20 tour-step-9" data-aos="fade-right">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">How It Works</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center text-[#CBD5E1]">
           {['🎥 Scan', '📚 Learn', '🛠️ Repair'].map((step, i) => (
@@ -144,7 +123,7 @@ const Home = () => {
       </section>
 
       {/* Features */}
-      <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20" data-aos="fade-left">
+      <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20 tour-step-10" data-aos="fade-left">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">What Refixly Can Do</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {features.map(({ title, desc }, i) => (
@@ -162,13 +141,19 @@ const Home = () => {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20" data-aos="fade-up">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">Frequently Asked Questions</h2>
-        <FAQAccordion faqs={faqs} />
-      </section>
+      <section
+  id="faq"
+  className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20"
+>
+  <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">
+    Frequently Asked Questions
+  </h2>
+  <FAQAccordion faqs={faqs} />
+</section>
+
 
       {/* Call To Action */}
-      <section id="ready" className="bg-[#0F172A] py-20 text-center" data-aos="zoom-in">
+      <section id="ready" className="bg-[#0F172A] py-20 text-center tour-step-12" data-aos="zoom-in">
         <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[#38BDF8]">Ready to Fix it Yourself?</h2>
         <p className="text-[#94A3B8] max-w-xl mx-auto mb-8">Join thousands of users who are repairing with confidence using Refixly.</p>
         <Link
@@ -180,7 +165,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#1E293B] py-8 text-center text-[#94A3B8]">
+      <footer className="bg-[#1E293B] py-8 text-center text-[#94A3B8] tour-step-footer">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 flex flex-col md:flex-row justify-between items-center gap-6">
           <p>&copy; 2025 Refixly. All rights reserved.</p>
 

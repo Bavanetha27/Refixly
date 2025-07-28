@@ -9,6 +9,7 @@ import community from "../assets/community.png";
 import eco from "../assets/eco.png";
 import self from "../assets/self.png";
 import toolkit from "../assets/toolkit.png";
+import HomeFAQ from '../components/HomeFAQ';
 
 const UserHome = () => {
   useEffect(() => {
@@ -44,6 +45,7 @@ const UserHome = () => {
 
       {/* Hero Section */}
       <section
+        id='hero-section'
         className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 relative text-white"
         data-aos="fade-up"
         style={{
@@ -199,27 +201,12 @@ const UserHome = () => {
           ))}
         </div>
       </section>
-      
+
 
 
       {/* FAQ */}
       <section className="bg-white py-20 px-6 max-w-4xl mx-auto" data-aos="zoom-in">
-        <h2 className="text-4xl font-bold mb-14 text-center text-blue-900" data-aos="fade-left">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-6">
-          {faqs.map((faq, i) => (
-            <details
-              key={i}
-              className="border border-blue-300 rounded-lg p-5 cursor-pointer hover:bg-blue-50"
-              data-aos="fade-up"
-              data-aos-delay={i * 150}
-            >
-              <summary className="text-lg font-semibold text-blue-700">{faq.q}</summary>
-              <p className="mt-3 text-gray-700">{faq.a}</p>
-            </details>
-          ))}
-        </div>
+        <HomeFAQ faqs={faqs} />
       </section>
 
       {/* CTA */}
@@ -233,10 +220,6 @@ const UserHome = () => {
         </button>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-white text-gray-600 py-6 text-center text-sm border-t border-blue-200">
-        <p>&copy; {new Date().getFullYear()} Refixly. All rights reserved.</p>
-      </footer>
     </div>
   );
 };
