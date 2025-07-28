@@ -6,6 +6,8 @@ import Signup from "./Pages/Signup"
 import Login from "./Pages/Login"
 import UserHome from "./Pages/Home"
 import Footer from "./components/Footer";
+import ScanPage from "./Pages/ScanPage";
+import TutorialsPage from "./Pages/TutorialsPage";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<UserHome />} />
+        <Route path="/scan" element={<ScanPage />} />
+        <Route path="/tutorials/:objectName" element={<TutorialsPage />} /> 
       </Routes>
 
       <Toaster />
