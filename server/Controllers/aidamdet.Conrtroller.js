@@ -1,45 +1,9 @@
-import express from "express";
-import dotenv from "dotenv"
-import cors from "cors";
-import fs from "fs";
-import multer from "multer";
+const dotenv = require('dotenv');
 
 dotenv.config();
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(cors());
-app.use(express.json()); // <-- Ensure JSON parsing for incoming requests
-
-//Multer setup if you want storing images
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         const uploadDir = './uploads';
-//         if (!fs.existsSync(uploadDir)) {
-//             fs.mkdirSync(uploadDir);
-//         }
-//         cb(null, uploadDir);
-//     },
-//     filename: (req, file, cb) => {
-//         const uniqueName = Date.now() + '-' + file.originalname.replace(/\s+/g, '_');
-//         cb(null, uniqueName);
-//     }
-// });
-
-// Use memory storage
-const storage = multer.memoryStorage();
-
-const upload = multer({ storage: storage });
-
-// Health check
-app.get('/', (req, res) => {
-    res.send('AI Damage Detection API running ✅');
-});
-
-// POST route for damage detection
-app.post('/api/ai-damage-detection', upload.array('images'), async (req, res) => {
-    const { type, model, description } = req.body;
+exports.AIDamageDetector = async(req, res) => {
+  const { type, model, description } = req.body;
     const images = req.files;
 
     if (!type || !description || images.length === 0) {
@@ -83,9 +47,4 @@ Respond in a clear and professional tone. If the issue appears severe, mention a
         console.error('AI damage detection error:', error);
         res.status(500).json({ success: false, message: 'Failed to analyze device damage.', error: error.message });
     }
-});
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server started on http://localhost:${PORT}`);
-});
+}
