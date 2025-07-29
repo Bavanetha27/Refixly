@@ -10,9 +10,7 @@ html {
   scroll-behavior: smooth;
 }
 
-
-.faq-glow {
-  box-shadow: 0 0 12px 3px #38BDF8;
-  transition: box-shadow 0.3s ease-in-out;
+.glow {
+  box-shadow: 0 0 12px #38BDF8aa, 0 0 25px #38BDF866;
 }
 

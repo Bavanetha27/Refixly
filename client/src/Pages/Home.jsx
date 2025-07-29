@@ -9,6 +9,7 @@ import community from "../assets/community.png";
 import eco from "../assets/eco.png";
 import self from "../assets/self.png";
 import toolkit from "../assets/toolkit.png";
+import HomeFAQ from '../components/HomeFAQ';
 
 const UserHome = () => {
   useEffect(() => {
@@ -62,7 +63,7 @@ const UserHome = () => {
           <p className="text-lg mb-8 leading-relaxed">
             Refixly is your AI-powered DIY assistant. Scan, Learn, and Repair—all from your pocket.
           </p>
-          <button className="bg-blue-400 hover:bg-blue-300 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition-transform transform hover:scale-105">
+          <button className="transition-all duration-500 text-white border-4 border-white font-montserrat uppercase text-center leading-none text-[17px] bg-transparent px-6 py-2 rounded hover:text-[#001F3F] hover:bg-white">
             Get Started
           </button>
         </div>
@@ -205,22 +206,7 @@ const UserHome = () => {
 
       {/* FAQ */}
       <section className="bg-white py-20 px-6 max-w-4xl mx-auto" data-aos="zoom-in">
-        <h2 className="text-4xl font-bold mb-14 text-center text-blue-900" data-aos="fade-left">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-6">
-          {faqs.map((faq, i) => (
-            <details
-              key={i}
-              className="border border-blue-300 rounded-lg p-5 cursor-pointer hover:bg-blue-50"
-              data-aos="fade-up"
-              data-aos-delay={i * 150}
-            >
-              <summary className="text-lg font-semibold text-blue-700">{faq.q}</summary>
-              <p className="mt-3 text-gray-700">{faq.a}</p>
-            </details>
-          ))}
-        </div>
+        <HomeFAQ faqs={faqs} />
       </section>
 
       {/* CTA */}

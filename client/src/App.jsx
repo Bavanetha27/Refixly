@@ -5,6 +5,7 @@ import Home from "./Pages/LandingPage"
 import Signup from "./Pages/Signup"
 import Login from "./Pages/Login"
 import UserHome from "./Pages/Home"
+
 import Footer from "./components/Footer";
 import ScanPage from "./Pages/ScanPage";
 import TutorialsPage from "./Pages/TutorialsPage";
@@ -22,7 +23,6 @@ function App() {
       </Routes>
 
       <Toaster />
-      <Footer />
     </>
   )
 };
