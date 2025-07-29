@@ -10,8 +10,11 @@ import eco from "../assets/eco.png";
 import self from "../assets/self.png";
 import toolkit from "../assets/toolkit.png";
 import HomeFAQ from '../components/HomeFAQ';
+import { useNavigate } from 'react-router-dom';
 
 const UserHome = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     AOS.init({ duration: 1000, easing: 'ease-in-out', once: false, mirror: true });
   }, []);
@@ -38,6 +41,18 @@ const UserHome = () => {
     { q: 'Do I need any tools?', a: 'No. A camera and internet connection are enough.' },
     { q: 'Can I upload my own tutorials?', a: 'Yes! Share your knowledge with the community.' },
   ];
+
+  const handleNagivaion = (title) => {
+    const slug = title
+    .toLowerCase()                // Convert to lowercase
+    .trim()                       // Remove leading/trailing whitespace
+    .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-')         // Replace spaces with dashes
+    .replace(/-+/g, '-');         // Replace multiple dashes with one
+
+    console.log(slug);
+    navigate(`/${slug}`);
+  }
 
   return (
     <div className="bg-white text-gray-900">
@@ -78,9 +93,10 @@ const UserHome = () => {
           {features.map((f, i) => (
             <div
               key={i}
-              className="p-8 border border-blue-300 rounded-2xl hover:shadow-xl transition-transform transform hover:scale-105"
+              className="p-8 border border-blue-300 rounded-2xl hover:shadow-xl transition-transform transform hover:scale-105 cursor-pointer"
               data-aos="zoom-in"
               data-aos-delay={i * 100}
+              onClick={() => handleNagivaion(f.title)}
             >
               <div className="text-6xl mb-5">{f.icon}</div>
               <h3 className="text-2xl font-semibold text-blue-600 mb-3">{f.title}</h3>

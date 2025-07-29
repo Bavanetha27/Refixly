@@ -6,6 +6,7 @@ import Signup from "./Pages/Signup"
 import Login from "./Pages/Login"
 import UserHome from "./Pages/Home"
 import Footer from "./components/Footer";
+import AIDamageDetection from './components/AIDamageDetection';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<UserHome />} />
+        <Route path='/ai-damage-detection' element={<AIDamageDetection />} />
       </Routes>
 
       <Toaster />
