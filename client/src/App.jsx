@@ -18,9 +18,8 @@ function App() {
         <Route path="/home" element={<UserHome />} />
         <Route path='/ai-damage-detection' element={<AIDamageDetection />} />
       </Routes>
-
-      <Toaster />
       <Footer />
+      <Toaster />
     </>
   )
 };

@@ -66,18 +66,41 @@ const Home = () => {
       `}</style>
 
       {/* Header */}
-      <header className="max-w-7xl mx-auto flex justify-between items-center py-8 px-4 sm:px-6 md:px-20" data-aos="fade-down">
-        <Link to="/login"><h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8] tour-step-1">Refixly</h1></Link>
-        <nav className="tour-step-navbar">
-          <ul className="hidden md:flex space-x-6 text-sm sm:text-base">
-            <li><a href="#how-it-works" className="hover:text-[#0EA5E9] transition">How It Works</a></li>
-            <li><a href="#features" className="hover:text-[#0EA5E9] transition">What Refixly Can Do</a></li>
-            <li><a href="#faq" className="hover:text-[#0EA5E9] transition">FAQ</a></li>
-            <li><a href="#ready" className="hover:text-[#0EA5E9] transition">Ready to Fix?</a></li>
-            <li><Link to="/signup" className="hover:text-[#0EA5E9] transition tour-step-2">SignUp</Link></li>
-          </ul>
-        </nav>
-      </header>
+<header className="w-full px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between bg-white/10 backdrop-blur-md shadow-md">
+  <Link to="/login">
+    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8] hover:scale-105 transition-transform duration-300">
+      Refixly
+    </h1>
+  </Link>
+
+  <nav>
+    <ul className="hidden md:flex items-center space-x-6 text-sm sm:text-base font-medium text-white">
+      {["how-it-works", "features", "faq", "ready"].map((id, i) => (
+        <li key={i}>
+          <a
+            href={`#${id}`}
+            className="relative group transition-colors duration-200"
+          >
+            <span className="hover:text-[#0EA5E9]">{{
+              "how-it-works": "How It Works",
+              features: "What Refixly Can Do",
+              faq: "FAQ",
+              ready: "Ready to Fix?",
+            }[id]}</span>
+            <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#0EA5E9] transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </li>
+      ))}
+      <li>
+        <Link to="/signup">
+          <button className="ml-2 px-6 py-2 text-white border-2 border-white rounded-full bg-transparent font-semibold transition duration-300 hover:bg-white hover:text-[#001F3F] hover:shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]">
+            Sign Up
+          </button>
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-16 text-center md:text-left tour-step-3" data-aos="fade-up">
@@ -91,10 +114,11 @@ const Home = () => {
             </p>
             <Link
               to="/login"
-              className="inline-block mt-8 px-8 py-3 bg-[#38BDF8] text-black font-semibold rounded-full shadow-lg hover:bg-[#0EA5E9] transition"
+               className="inline-block mt-8 px-8 py-3 text-white font-montserrat uppercase text-[17px] border-4 border-white rounded-full bg-transparent transition-all duration-500 shadow-lg hover:bg-white hover:text-[#001F3F] hover:shadow-[0_0_15px_3px_rgba(255,255,255,0.7)]"
             >
               Get Started
             </Link>
+
           </div>
           <div className="flex-1 flex justify-center">
             <img
@@ -109,26 +133,34 @@ const Home = () => {
       {/* How It Works */}
       <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20 tour-step-9" data-aos="fade-right">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">How It Works</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center text-[#CBD5E1]">
-          {['🎥 Scan', '📚 Learn', '🛠️ Repair'].map((step, i) => (
-            <div key={i} className="bg-[#334155] p-8 rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300">
-              <h3 className="text-xl font-semibold mb-2">{step.split(' ')[1]}</h3>
-              <p>{['Use your webcam to scan the item.', 'Access step-by-step repair guides.', 'Follow tutorials to fix confidently.'][i]}</p>
-            </div>
-          ))}
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center text-[#CBD5E1]">
+            {['🎥 Scan', '📚 Learn', '🛠️ Repair'].map((step, i) => (
+              <div
+                key={i}
+                className="bg-[#334155] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(56,189,248,0.3)] hover:bg-[#1e293b]"
+                >
+                <h3 className="text-xl font-semibold mb-2">{step.split(' ')[1]}</h3>
+                <p> 
+                {[
+                'Use your webcam to scan the item.',
+                'Access step-by-step repair guides.',
+                'Follow tutorials to fix confidently.',
+                ][i]}
+                </p>
+              </div>
+            ))}
+          </div>
       </section>
 
       {/* Features */}
       <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20 tour-step-10" data-aos="fade-left">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">What Refixly Can Do</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center text-[#CBD5E1]">
           {features.map(({ title, desc }, i) => (
             <div
               key={i}
-              className="bg-[#334155] rounded-2xl p-6 shadow-lg hover:scale-105 transition duration-300"
-              data-aos="fade-up"
-              data-aos-delay={i * 200}
+                className="bg-[#334155] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(56,189,248,0.3)] hover:bg-[#1e293b]"
+                
             >
               <h3 className="text-xl font-semibold mb-4 text-[#38BDF8]">{title}</h3>
               <p className="text-[#CBD5E1]">{desc}</p>
@@ -137,17 +169,21 @@ const Home = () => {
         </div>
       </section>
 
+
+
       {/* FAQ */}
       <section
   id="faq"
   className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20"
+  data-aos="fade-up"
 >
   <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">
     Frequently Asked Questions
   </h2>
-  <FAQAccordion faqs={faqs} />
+  <div className="transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl rounded-xl bg-white/5 backdrop-blur-sm p-4">
+    <FAQAccordion faqs={faqs} />
+  </div>
 </section>
-
 
       {/* Call To Action */}
       <section id="ready" className="bg-[#0F172A] py-20 text-center tour-step-12" data-aos="zoom-in">
@@ -160,45 +196,6 @@ const Home = () => {
           Get Started Now
         </Link>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-[#1E293B] py-8 text-center text-[#94A3B8] tour-step-footer">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p>&copy; 2025 Refixly. All rights reserved.</p>
-
-          <div className="flex space-x-6 text-xl">
-            <a
-              href="https://twitter.com/yourhandle"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#38BDF8] transition"
-              aria-label="Twitter"
-            >
-              <FaTwitter />
-            </a>
-            <a
-              href="https://facebook.com/yourhandle"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#38BDF8] transition"
-              aria-label="Facebook"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href="https://linkedin.com/in/yourhandle"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#38BDF8] transition"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedinIn />
-            </a>
-          </div>
-        </div>
-
-        <ScrollToTop />
-      </footer>
     </div>
   );
 };
