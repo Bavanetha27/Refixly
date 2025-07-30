@@ -65,15 +65,14 @@ const Home = () => {
         }
       `}</style>
 
-      {/* Header */}
-<header className="w-full px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between bg-white/10 backdrop-blur-md shadow-md">
-  <Link to="/login">
-    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8] hover:scale-105 transition-transform duration-300">
+<header className="w-full px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between bg-white/10 backdrop-blur-md shadow-md" data-aos="fade-down">
+  <Link to="/">
+    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8] hover:scale-105 transition-transform duration-300 tour-step-1">
       Refixly
     </h1>
   </Link>
 
-  <nav>
+  <nav className="tour-step-navbar">
     <ul className="hidden md:flex items-center space-x-6 text-sm sm:text-base font-medium text-white">
       {["how-it-works", "features", "faq", "ready"].map((id, i) => (
         <li key={i}>
@@ -92,7 +91,7 @@ const Home = () => {
         </li>
       ))}
       <li>
-        <Link to="/signup">
+        <Link to="/signup" className="tour-step-2">
           <button className="ml-2 px-6 py-2 text-white border-2 border-white rounded-full bg-transparent font-semibold transition duration-300 hover:bg-white hover:text-[#001F3F] hover:shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]">
             Sign Up
           </button>
