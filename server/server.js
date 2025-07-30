@@ -4,6 +4,7 @@ require('dotenv').config();
 
 // Import routes
 const tutorialRoutes = require('./routes/tutorials');
+const aiDamageDetectRoutes = require('./routes/aidamdet.route')
 
 // Initialize the Express app
 const app = express();
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 // Use the tutorial routes
 // All routes in tutorials.js will be prefixed with /api/tutorials
 app.use('/api/tutorials', tutorialRoutes);
+app.use('/', aiDamageDetectRoutes);
 
 // Define the port
 const PORT = process.env.PORT || 5000;
