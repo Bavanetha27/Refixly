@@ -63,7 +63,7 @@ const UserHome = () => {
           <p className="text-lg mb-8 leading-relaxed">
             Refixly is your AI-powered DIY assistant. Scan, Learn, and Repair—all from your pocket.
           </p>
-          <button className="bg-blue-400 hover:bg-blue-300 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition-transform transform hover:scale-105">
+          <button className="transition-all duration-500 text-white border-4 border-white font-montserrat uppercase text-center leading-none text-[17px] bg-transparent px-6 py-2 rounded hover:text-[#001F3F] hover:bg-white">
             Get Started
           </button>
         </div>
