@@ -291,10 +291,6 @@ const Tutorial = () => {
         )}
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 text-center text-[#94A3B8]">
-        <p>&copy; 2025 Refixly. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

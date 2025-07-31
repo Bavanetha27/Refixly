@@ -49,17 +49,27 @@ const TutorialsPage = () => {
     fetchTutorials();
   };
 
-  const handleSaveTutorial = (tutorialToSave) => {
-    const saved = JSON.parse(localStorage.getItem('refixly_savedTutorials')) || [];
-    if (saved.some(t => t.videoId === tutorialToSave.videoId)) {
-      toast.error('You have already saved this tutorial.');
-      setSavedTutorials(prev => [...prev, tutorialToSave]);
-      return;
-    }
-    const updatedSaved = [tutorialToSave, ...saved];
-    localStorage.setItem('refixly_savedTutorials', JSON.stringify(updatedSaved));
-    toast.success('Tutorial saved!');
-  };
+useEffect(() => {
+  const stored = localStorage.getItem('refixly_savedTutorials');
+  if (stored) {
+    setSavedTutorials(JSON.parse(stored));
+  }
+}, []);
+
+const handleSaveTutorial = (tutorialToSave) => {
+  const saved = JSON.parse(localStorage.getItem('refixly_savedTutorials')) || [];
+
+  if (saved.some(t => t.videoId === tutorialToSave.videoId)) {
+    toast.error('You have already saved this tutorial.');
+    return;
+  }
+
+const updatedSaved = [tutorialToSave, ...saved];
+  localStorage.setItem('refixly_savedTutorials', JSON.stringify(updatedSaved));
+  setSavedTutorials(updatedSaved);
+  toast.success('Tutorial saved!');
+};
+
 
   if (isLoading && tutorials.length === 0) {
     return (
