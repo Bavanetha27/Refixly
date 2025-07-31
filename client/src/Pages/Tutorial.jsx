@@ -13,6 +13,7 @@ const Tutorial = () => {
   const [searchHistory, setSearchHistory] = useState([]);
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [bookmarkedTutorials, setBookmarkedTutorials] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const categories = [
     { name: "Electrical", query: "electrical repair" },
@@ -88,6 +89,7 @@ const Tutorial = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setSelectedCategory("");
+    setHasSearched(true);
     fetchTutorials(searchTerm);
   };
 
@@ -218,7 +220,7 @@ const Tutorial = () => {
         )}
 
         {/* Empty Search State */}
-        {!loading && !error && tutorials.length === 0 && !searchTerm && (
+        {!loading && !error && tutorials.length === 0 && (
           <div className="text-center py-20 opacity-60">
             <FileQuestion className="mx-auto mb-4 w-12 h-12 text-[#38BDF8]" />
             <p className="text-lg text-gray-400">
@@ -228,7 +230,7 @@ const Tutorial = () => {
         )}
 
         {/* No Results State */}
-        {!loading && !error && tutorials.length === 0 && searchTerm && (
+        {!loading && !error && tutorials.length === 0 && hasSearched && (
           <p className="text-center text-gray-400 text-xl mt-16">
             No tutorials found for "
             <span className="text-white font-semibold">{searchTerm}</span>".
@@ -266,7 +268,7 @@ const Tutorial = () => {
                   <button
                     onClick={() => handleSaveTutorial(tutorial)}
                     disabled={isTutorialSaved(tutorial.videoId)}
-                    className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-colors${isTutorialSaved(tutorial.videoId) ? "bg-green-700 text-white cursor-not-allowed" : "bg-gray-700 hover:bg-gray-600 text-white"}`}>
+                    className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg transition-colors ${isTutorialSaved(tutorial.videoId) ? "bg-green-700 text-white cursor-not-allowed" : "bg-gray-700 hover:bg-gray-600 text-white"}`}>
                     <Bookmark size={16} />
                     {isTutorialSaved(tutorial.videoId)
                       ? "Saved"

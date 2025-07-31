@@ -116,6 +116,7 @@ const updatedSaved = [tutorialToSave, ...saved];
                 </a>
                 <div className="mt-auto p-4 border-t border-gray-700">
                   <button onClick={() => handleSaveTutorial(tutorial)} className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold ${savedTutorials.some(t => t.videoId === tutorial.videoId) ? "bg-green-700 text-white cursor-not-allowed": "bg-gray-700 hover:bg-gray-600 text-white"} rounded-lg transition-colors`}>
+                    <Bookmark size={16} />
                     {savedTutorials.some(t => t.videoId === tutorial.videoId) ? 'Saved' : <><Bookmark size={16} /> Save Tutorial</>}
                   </button>
                 </div>
