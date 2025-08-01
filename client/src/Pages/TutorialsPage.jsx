@@ -12,6 +12,8 @@ const TutorialsPage = () => {
   const [searchTerm, setSearchTerm] = useState(objectName);
   const [nextPageToken, setNextPageToken] = useState('');
 
+  const [savedTutorials, setSavedTutorials] = useState([]); 
+
   const fetchTutorials = async (loadMore = false) => {
     setIsLoading(true);
     setError(null);
@@ -47,16 +49,27 @@ const TutorialsPage = () => {
     fetchTutorials();
   };
 
-  const handleSaveTutorial = (tutorialToSave) => {
-    const saved = JSON.parse(localStorage.getItem('refixly_savedTutorials')) || [];
-    if (saved.some(t => t.videoId === tutorialToSave.videoId)) {
-      toast.error('You have already saved this tutorial.');
-      return;
-    }
-    const updatedSaved = [tutorialToSave, ...saved];
-    localStorage.setItem('refixly_savedTutorials', JSON.stringify(updatedSaved));
-    toast.success('Tutorial saved!');
-  };
+useEffect(() => {
+  const stored = localStorage.getItem('refixly_savedTutorials');
+  if (stored) {
+    setSavedTutorials(JSON.parse(stored));
+  }
+}, []);
+
+const handleSaveTutorial = (tutorialToSave) => {
+  const saved = JSON.parse(localStorage.getItem('refixly_savedTutorials')) || [];
+
+  if (saved.some(t => t.videoId === tutorialToSave.videoId)) {
+    toast.error('You have already saved this tutorial.');
+    return;
+  }
+
+const updatedSaved = [tutorialToSave, ...saved];
+  localStorage.setItem('refixly_savedTutorials', JSON.stringify(updatedSaved));
+  setSavedTutorials(updatedSaved);
+  toast.success('Tutorial saved!');
+};
+
 
   if (isLoading && tutorials.length === 0) {
     return (
@@ -102,8 +115,9 @@ const TutorialsPage = () => {
                   </div>
                 </a>
                 <div className="mt-auto p-4 border-t border-gray-700">
-                  <button onClick={() => handleSaveTutorial(tutorial)} className="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
-                    <Bookmark size={16} /> Save Tutorial
+                  <button onClick={() => handleSaveTutorial(tutorial)} className={`w-full flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold ${savedTutorials.some(t => t.videoId === tutorial.videoId) ? "bg-green-700 text-white cursor-not-allowed": "bg-gray-700 hover:bg-gray-600 text-white"} rounded-lg transition-colors`}>
+                    <Bookmark size={16} />
+                    {savedTutorials.some(t => t.videoId === tutorial.videoId) ? 'Saved' : <><Bookmark size={16} /> Save Tutorial</>}
                   </button>
                 </div>
               </div>

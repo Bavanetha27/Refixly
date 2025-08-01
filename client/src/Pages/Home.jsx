@@ -13,6 +13,7 @@ import HomeFAQ from '../components/HomeFAQ';
 import { useNavigate } from 'react-router-dom';
 
 const UserHome = () => {
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,7 +79,7 @@ const UserHome = () => {
           <p className="text-lg mb-8 leading-relaxed">
             Refixly is your AI-powered DIY assistant. Scan, Learn, and Repair—all from your pocket.
           </p>
-          <button className="transition-all duration-500 text-white border-4 border-white font-montserrat uppercase text-center leading-none text-[17px] bg-transparent px-6 py-2 rounded hover:text-[#001F3F] hover:bg-white">
+          <button className="transition-all duration-500 text-white border-4 border-white font-montserrat uppercase text-center leading-none text-[17px] bg-transparent px-6 py-2 rounded hover:text-[#001F3F] hover:bg-white" onClick={() => navigate('/scan')}>
             Get Started
           </button>
         </div>
