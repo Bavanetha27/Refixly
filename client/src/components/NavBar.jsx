@@ -57,6 +57,38 @@ const NavBar = () => {
       console.error('Logout error:', err.message);
     }
   };
+  const handleDeleteAccount = async () => {// here added deleting account logic
+    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      try {
+        await user.delete();
+        await signOut(auth);
+        alert("Your account has been deleted.");
+        navigate('/');
+      } catch (error) {
+        if (error.code === 'auth/requires-recent-login') {
+          const password = prompt("For security, please enter your password again to delete your account:");
+          if (!password) return;
+
+          const credential = EmailAuthProvider.credential(user.email, password);
+
+          try {
+            await reauthenticateWithCredential(user, credential);
+            await user.delete();
+            await signOut(auth);
+            alert("Your account has been deleted.");
+            navigate('/');
+          } catch (reauthError) {
+            console.error(reauthError);
+            alert("Failed to reauthenticate and delete account.");
+          }
+        } else {
+          console.error(error);
+          alert("Failed to delete account.");
+        }
+      }
+    }
+  };
+
 
   const linkClass = ({ isActive }) =>
     isActive ? 'text-blue-400 underline' : 'hover:text-blue-300 transition';
@@ -107,6 +139,11 @@ const NavBar = () => {
               className="w-full text-left block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
             >
               Logout
+            </button>
+            <button // here delete button added
+              onClick={handleDeleteAccount}
+              className="w-full text-left block px-4 py-2 text-sm text-red-400 hover:bg-gray-700 hover:text-red-300">
+              Delete Account
             </button>
           </div>
         )}
