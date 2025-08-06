@@ -224,7 +224,7 @@ See the [LICENSE](LICENSE) file for details.
 ## 📬 Contact
 
 * 🧑‍💻 Maintainer: [Bavanetha M R](https://github.com/Bavanetha27)
-* 📧 Email: [bavanethamr.com](mailto:bavanethamr.com)
+* 📧 Email: [bavanethamr@gmail.com](mailto:bavanethamr@gmail.com)
 
 ---
 
