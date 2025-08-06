@@ -56,7 +56,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-[#0F172A] via-[#1E293B] to-[#334155] text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white font-sans overflow-x-hidden">
       {showTour && <Tour onClose={() => setShowTour(false)} auto={true} />}
       <style>{`
         .faq-glow {
@@ -65,7 +65,7 @@ const Home = () => {
         }
       `}</style>
 
-<header className="w-full px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between bg-white/10 backdrop-blur-md shadow-md" data-aos="fade-down">
+<header className="w-full px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between bg-gradient-to-b from-[#132266] to-[#2918cc] shadow-md" data-aos="fade-down">
   <Link to="/">
     <h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8] hover:scale-105 transition-transform duration-300 tour-step-1">
       Refixly
@@ -136,7 +136,7 @@ const Home = () => {
             {['🎥 Scan', '📚 Learn', '🛠️ Repair'].map((step, i) => (
               <div
                 key={i}
-                className="bg-[#334155] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(56,189,248,0.3)] hover:bg-[#1e293b]"
+                className="bg-[#0F172A] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_32px_rgba(0,213,255,1)] hover:bg-[#0F172A]"
                 >
                 <h3 className="text-xl font-semibold mb-2">{step.split(' ')[1]}</h3>
                 <p> 
@@ -158,7 +158,7 @@ const Home = () => {
           {features.map(({ title, desc }, i) => (
             <div
               key={i}
-                className="bg-[#334155] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_25px_rgba(56,189,248,0.3)] hover:bg-[#1e293b]"
+                className="bg-[#0F172A] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_32px_rgba(0,213,255,1)] hover:bg-[#0F172A]"
                 
             >
               <h3 className="text-xl font-semibold mb-4 text-[#38BDF8]">{title}</h3>
@@ -179,18 +179,18 @@ const Home = () => {
   <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">
     Frequently Asked Questions
   </h2>
-  <div className="transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:shadow-2xl rounded-xl bg-white/5 backdrop-blur-sm p-4">
+  <div className="transition-transform duration-300 ease-in-out rounded-xl">
     <FAQAccordion faqs={faqs} />
   </div>
 </section>
 
       {/* Call To Action */}
-      <section id="ready" className="bg-[#0F172A] py-20 text-center tour-step-12" data-aos="zoom-in">
+      <section id="ready" className="bg-[#130b29] py-20 text-center tour-step-12" data-aos="zoom-in">
         <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[#38BDF8]">Ready to Fix it Yourself?</h2>
         <p className="text-[#94A3B8] max-w-xl mx-auto mb-8">Join thousands of users who are repairing with confidence using Refixly.</p>
         <Link
           to="/login"
-          className="inline-block px-10 py-3 bg-[#38BDF8] text-black font-semibold rounded-full shadow-lg hover:bg-[#0EA5E9] transition"
+          className="inline-block px-10 py-3 bg-[#38BDF8] text-black font-semibold rounded-full transform transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0px_12px_white] hover:bg-[#38BDF8]"
         >
           Get Started Now
         </Link>

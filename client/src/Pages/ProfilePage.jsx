@@ -123,7 +123,7 @@ const ProfilePage = () => {
   const tabButtonStyle = (tabName) => `flex items-center gap-2 px-4 py-2 font-semibold rounded-t-lg border-b-2 transition-colors ${activeTab === tabName ? 'border-blue-400 text-blue-400' : 'border-transparent text-gray-400 hover:text-white'}`;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white pt-24">
+    <div className="min-h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white pt-24">
       <NavBar />
       <div className="max-w-4xl mx-auto p-4 sm:p-8">
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">

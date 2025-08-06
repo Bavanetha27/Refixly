@@ -133,7 +133,7 @@ const Tutorial = () => {
   // };
 
   return (
-    <div className="min-h-screen pt-24 bg-gradient-to-tr from-[#0F172A] via-[#1E293B] to-[#334155] text-white font-sans overflow-x-hidden flex justify-center flex-col">
+    <div className="min-h-screen pt-24 bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white font-sans overflow-x-hidden flex justify-center flex-col">
       <NavBar />
       {/* Hero Section */}
       <header className="text-center py-12 text-white">

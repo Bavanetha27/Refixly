@@ -59,7 +59,7 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen bg-no-repeat bg-left flex flex-col-reverse md:flex-row items-center justify-center md:justify-end px-4 md:pr-20"
+      className="bg-[#130b29] min-h-screen bg-no-repeat bg-left flex flex-col-reverse md:flex-row items-center justify-center md:justify-end px-4 md:pr-20"
       style={{ backgroundImage: `url(${authBg})` }}
     >
       <div className="bg-white/90 rounded-3xl shadow-xl max-w-md w-full px-10 py-12 backdrop-blur-md text-center">

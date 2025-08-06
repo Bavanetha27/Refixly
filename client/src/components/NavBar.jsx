@@ -91,12 +91,12 @@ const NavBar = () => {
 
 
   const linkClass = ({ isActive }) =>
-    isActive ? 'text-blue-400 underline' : 'hover:text-blue-300 transition';
+    isActive ? 'text-cyan-400 underline' : 'hover:text-cyan-300 transition';
 
   return (
     <nav
   className={`fixed top-0 left-0 right-0 z-50 duration-300 text-white backdrop-blur-sm transition-colors ${
-    overHero ? 'bg-transparent' : 'bg-[#1E293B]/70'
+    overHero ? 'bg-transparent' : 'bg-[#1E293B]/'
   }`}
   aria-label="Main Navigation"
 >

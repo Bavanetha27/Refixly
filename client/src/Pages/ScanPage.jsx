@@ -112,7 +112,7 @@ const ScanPage = () => {
   const inactiveButtonStyle = "bg-gray-700 text-gray-300 hover:bg-gray-600";
 
   return (
-    <div className="h-screen bg-gray-900 text-white pt-20 flex flex-col">
+    <div className="h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white pt-20 flex flex-col">
       <NavBar />
       <div className="flex-1 overflow-y-auto flex flex-col items-center p-4 sm:p-6">
         <div className="w-full max-w-4xl text-center">

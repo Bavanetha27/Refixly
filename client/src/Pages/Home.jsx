@@ -56,7 +56,7 @@ const UserHome = () => {
   }
 
   return (
-    <div className="bg-white text-gray-900">
+    <div className="bg-gradient-to-b from-[#2918cc] to-[#7541dc] text-gray-900">
       <Navbar />
 
       {/* Hero Section */}
@@ -94,7 +94,7 @@ const UserHome = () => {
           {features.map((f, i) => (
             <div
               key={i}
-              className="p-8 border border-blue-300 rounded-2xl hover:shadow-xl transition-transform transform hover:scale-105 cursor-pointer"
+              className="bg-[#0F172A] p-8 border border-blue-300 rounded-2xl hover:shadow-xl transition-transform transform hover:scale-105 cursor-pointer"
               data-aos="zoom-in"
               data-aos-delay={i * 100}
               onClick={() => handleNagivaion(f.title)}

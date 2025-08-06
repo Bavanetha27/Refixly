@@ -13,7 +13,7 @@ const FAQAccordion = ({ faqs }) => {
       {faqs.map((faq, i) => (
         <div
           key={i}
-          className={`rounded-2xl bg-[#1e293b] border border-[#334155] shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`bg-[#0F172A] rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_32px_rgba(0,213,255,1)] hover:bg-[#0F172A] ${
             openIndex === i
               ? "ring-2 ring-[#38BDF8] glow"
               : "hover:ring-1 hover:ring-[#38BDF8]/40"
@@ -21,7 +21,7 @@ const FAQAccordion = ({ faqs }) => {
         >
           <button
             onClick={() => toggle(i)}
-            className="w-full flex justify-between items-center px-6 py-5 sm:py-6 text-left focus:outline-none"
+            className="w-full flex justify-between items-center px-6 py-5 sm:py-6 text-left focus:outline-none "
           >
             <h3 className="text-base sm:text-xl font-medium text-white">{faq.q}</h3>
             <span className="text-[#38BDF8] text-2xl font-bold">
