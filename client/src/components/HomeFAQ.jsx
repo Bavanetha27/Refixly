@@ -9,7 +9,7 @@ const HomeFAQ = ({ faqs }) => {
   };
 
   return (
-    <section className="bg-white py-20 px-6 max-w-4xl mx-auto" data-aos="zoom-in">
+    <section className="bg-gradient-to-b from-[#2918cc] to-[#7541dc] py-20 px-6 max-w-4xl mx-auto" data-aos="zoom-in">
       <h2
         className="text-4xl font-bold mb-14 text-center text-blue-900"
         data-aos="fade-left"
@@ -21,12 +21,12 @@ const HomeFAQ = ({ faqs }) => {
         {faqs.map((faq, i) => (
           <div
             key={i}
-            className="border border-blue-300 rounded-lg p-5 cursor-pointer hover:bg-blue-50 transition-all duration-300"
+            className="bg-gradient-to-b from-[#2918cc] to-[#7541dc] border border-blue-300 rounded-lg p-5 cursor-pointer hover:bg-blue-50 transition-all duration-300"
             onClick={() => toggle(i)}
             data-aos="fade-up"
             data-aos-delay={i * 150}
           >
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center ">
               <h3 className="text-lg font-semibold text-blue-700">{faq.q}</h3>
               <span className="text-2xl text-blue-600 font-bold">
                 {openIndex === i ? "−" : "+"}

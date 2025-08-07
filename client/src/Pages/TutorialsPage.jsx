@@ -82,7 +82,7 @@ const updatedSaved = [tutorialToSave, ...saved];
   }
   
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white">
       <NavBar />
       <div className="max-w-7xl mx-auto p-4 sm:p-8 pt-24">
         <Link to="/scan" className="text-blue-400 hover:underline mb-6 inline-block">&larr; Back to Scanner</Link>
