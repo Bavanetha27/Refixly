@@ -4,10 +4,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../index.css';
 import ScrollToTop from '../components/ScrollTop';
-import { FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import { FaTwitter, FaFacebookF, FaLinkedinIn, FaArrowRight, FaPlay, FaStar, FaUsers, FaShieldAlt } from 'react-icons/fa';
 import Tour from '../components/Tour';
 import FAQAccordion from '../components/FAQAccordion';
-
 
 const Home = () => {
   const [showTour, setShowTour] = useState(false);
@@ -27,17 +26,30 @@ const Home = () => {
 
   const features = [
     {
+      icon: '🔍',
       title: 'Real-time Object Detection',
       desc: 'Scan broken items using your webcam and let AI identify the issue.',
+      gradient: 'from-blue-500 to-cyan-500'
     },
     {
+      icon: '📚',
       title: 'Repair Tutorials',
       desc: 'Get video guides and repair steps curated for your object.',
+      gradient: 'from-purple-500 to-pink-500'
     },
     {
-      title: 'AR Repair Assistant (Coming Soon)',
+      icon: '🥽',
+      title: 'AR Repair Assistant',
       desc: 'Visualize step-by-step repairs with Augmented Reality overlays.',
+      gradient: 'from-green-500 to-emerald-500'
     },
+  ];
+
+  const stats = [
+    { number: '10K+', label: 'Successful Repairs' },
+    { number: '500+', label: 'Video Tutorials' },
+    { number: '95%', label: 'Success Rate' },
+    { number: '24/7', label: 'AI Support' },
   ];
 
   const faqs = [
@@ -56,144 +68,222 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#f8fafc] pt-20 overflow-x-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Remove animated background blobs */}
+      </div>
+
       {showTour && <Tour onClose={() => setShowTour(false)} auto={true} />}
+
       <style>{`
         .faq-glow {
-          box-shadow: 0 0 12px 3px #38BDF8;
+          box-shadow: 0 0 12px 3px #a78bfa;
           transition: box-shadow 0.3s ease-in-out;
+        }
+        .glass-effect, .modern-card {
+          background: #fff;
+          backdrop-filter: none;
+          border: 1.5px solid #ede9fe;
+          box-shadow: 0 4px 24px 0 rgba(168,139,250,0.08), 0 1.5px 8px 0 rgba(55,48,163,0.06);
+        }
+        .gradient-text {
+          background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        .modern-section {
+          transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        .modern-section.aos-animate {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        .modern-cta {
+          transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s, background 0.25s;
+          background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+          color: #fff;
+        }
+        .modern-cta:hover {
+          transform: scale(1.07) translateY(-2px);
+          box-shadow: 0 8px 32px 0 rgba(168,139,250,0.18), 0 1.5px 8px 0 rgba(55,48,163,0.12);
+          background: linear-gradient(90deg, #a78bfa 0%, #7c3aed 100%);
+        }
+        @media (max-width: 640px) {
+          .modern-card, .glass-effect {
+            padding: 1.25rem !important;
+            border-radius: 1rem !important;
+          }
+        }
+        body, .min-h-screen {
+          background: #f8fafc !important;
         }
       `}</style>
 
-<header className="w-full px-4 sm:px-6 md:px-12 py-4 flex items-center justify-between bg-gradient-to-b from-[#132266] to-[#2918cc] shadow-md" data-aos="fade-down">
-  <Link to="/">
-    <h1 className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8] hover:scale-105 transition-transform duration-300 tour-step-1">
-      Refixly
-    </h1>
-  </Link>
+      {/* Modern Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 w-full px-2 sm:px-4 md:px-8 py-4 bg-white border-b border-purple-100 shadow-sm" data-aos="fade-down" style={{ backdropFilter: 'blur(8px)' }}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <Link to="/" className="group">
+            <h1 className="text-3xl sm:text-4xl font-extrabold gradient-text hover:scale-105 transition-transform duration-300 tour-step-1">
+              Refixly
+            </h1>
+          </Link>
 
-  <nav className="tour-step-navbar">
-    <ul className="hidden md:flex items-center space-x-6 text-sm sm:text-base font-medium text-white">
-      {["how-it-works", "features", "faq", "ready"].map((id, i) => (
-        <li key={i}>
-          <a
-            href={`#${id}`}
-            className="relative group transition-colors duration-200"
-          >
-            <span className="hover:text-[#0EA5E9]">{{
-              "how-it-works": "How It Works",
-              features: "What Refixly Can Do",
-              faq: "FAQ",
-              ready: "Ready to Fix?",
-            }[id]}</span>
-            <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-[#0EA5E9] transition-all duration-300 group-hover:w-full"></span>
-          </a>
-        </li>
-      ))}
-      <li>
-        <Link to="/signup" className="tour-step-2">
-          <button className="ml-2 px-6 py-2 text-white border-2 border-white rounded-full bg-transparent font-semibold transition duration-300 hover:bg-white hover:text-[#001F3F] hover:shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]">
-            Sign Up
-          </button>
-        </Link>
-      </li>
-    </ul>
-  </nav>
-</header>
+          <nav className="tour-step-navbar">
+            <ul className="hidden md:flex items-center space-x-8 text-sm sm:text-base font-medium text-purple-700">
+              {["how-it-works", "features", "faq", "ready"].map((id, i) => (
+                <li key={i}>
+                  <a
+                    href={`#${id}`}
+                    className="relative group transition-all duration-300 hover:text-purple-500"
+                  >
+                    <span className="relative z-10">{{ "how-it-works": "How It Works", features: "Features", faq: "FAQ", ready: "Get Started" }[id]}</span>
+                    <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+                </li>
+              ))}
+              <li>
+                <Link to="/signup" className="tour-step-2">
+                  <button className="modern-cta relative px-8 py-3 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg group">
+                    <span className="relative z-10">Sign Up</span>
+                  </button>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-16 text-center md:text-left tour-step-3" data-aos="fade-up">
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-10">
-          <div className="flex-1 max-w-xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
-              Welcome to <span className="text-[#38BDF8]">Refixly</span>
+      <section className="relative max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-16 text-center md:text-left tour-step-3 modern-section" data-aos="fade-up">
+        <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-16">
+          <div className="flex-1 max-w-2xl">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-purple-50 border border-purple-200 text-purple-600 text-sm font-medium mb-6">
+              <FaStar className="mr-2" />
+              AI-Powered Repair Assistant
+            </div>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-purple-900" style={{ letterSpacing: '-1px' }}>
+              <span className="gradient-text">Repair</span> with
+              <br />
+              <span className="text-purple-700">Confidence</span>
             </h1>
-            <p className="mt-6 text-[#94A3B8] text-base sm:text-lg leading-relaxed">
-              Your AI-powered DIY repair assistant. Detect. Learn. Repair.
+            <p className="text-xl text-gray-700 leading-relaxed mb-8 max-w-lg">
+              Your AI-powered DIY repair assistant. Scan, diagnose, and fix with step-by-step guidance.
             </p>
-            <Link
-              to="/login"
-               className="inline-block mt-8 px-8 py-3 text-white font-montserrat uppercase text-[17px] border-4 border-white rounded-full bg-transparent transition-all duration-500 shadow-lg hover:bg-white hover:text-[#001F3F] hover:shadow-[0_0_15px_3px_rgba(255,255,255,0.7)]"
-            >
-              Get Started
-            </Link>
-
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/login" className="group">
+                <button className="modern-cta relative px-8 py-4 font-semibold rounded-full transition-all duration-300 transform flex items-center">
+                  <span>Get Started Free</span>
+                  <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
+              <button className="modern-cta px-8 py-4 font-semibold rounded-full border-2 border-purple-200 bg-white text-purple-700 hover:bg-purple-50 hover:text-purple-900 transition-all duration-300 flex items-center group shadow-none">
+                <FaPlay className="mr-2" />
+                <span>Watch Demo</span>
+              </button>
+            </div>
           </div>
-          <div className="flex-1 flex justify-center">
+          <div className="flex-1 flex justify-center relative">
             <img
               src="https://cdn-icons-png.flaticon.com/512/1055/1055672.png"
               alt="Repair"
-              className="w-60 sm:w-80 md:w-[28rem] drop-shadow-2xl"
+              className="relative w-80 h-80 object-contain drop-shadow-xl"
             />
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20 tour-step-9" data-aos="fade-right">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">How It Works</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center text-[#CBD5E1]">
-            {['🎥 Scan', '📚 Learn', '🛠️ Repair'].map((step, i) => (
-              <div
-                key={i}
-                className="bg-[#0F172A] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_32px_rgba(0,213,255,1)] hover:bg-[#0F172A]"
-                >
-                <h3 className="text-xl font-semibold mb-2">{step.split(' ')[1]}</h3>
-                <p> 
-                {[
-                'Use your webcam to scan the item.',
-                'Access step-by-step repair guides.',
-                'Follow tutorials to fix confidently.',
-                ][i]}
-                </p>
+      {/* Stats Section */}
+      <section className="relative max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-12" data-aos="fade-up">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center group">
+              <div className="glass-effect rounded-2xl p-6 hover:scale-105 transition-all duration-300">
+                <div className="text-3xl md:text-4xl font-bold text-purple-700 mb-2">{stat.number}</div>
+                <div className="text-gray-500 text-sm">{stat.label}</div>
               </div>
-            ))}
-          </div>
-      </section>
-
-      {/* Features */}
-      <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20 tour-step-10" data-aos="fade-left">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">What Refixly Can Do</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center text-[#CBD5E1]">
-          {features.map(({ title, desc }, i) => (
-            <div
-              key={i}
-                className="bg-[#0F172A] p-8 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-[0_10px_32px_rgba(0,213,255,1)] hover:bg-[#0F172A]"
-                
-            >
-              <h3 className="text-xl font-semibold mb-4 text-[#38BDF8]">{title}</h3>
-              <p className="text-[#CBD5E1]">{desc}</p>
             </div>
           ))}
         </div>
       </section>
 
+      {/* How It Works */}
+      <section id="how-it-works" className="relative max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-16 tour-step-9 modern-section" data-aos="fade-right">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 gradient-text" style={{ letterSpacing: '-1px' }}>How It Works</h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto font-medium">Three simple steps to repair anything with AI assistance</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[{ icon: '📱', title: 'Scan', desc: 'Use your camera to scan the broken device and let AI identify the issue.' }, { icon: '🧠', title: 'Analyze', desc: 'Get instant diagnosis and step-by-step repair instructions.' }, { icon: '🛠️', title: 'Repair', desc: 'Follow guided tutorials with AR assistance to fix confidently.' }].map((step, i) => (
+            <div key={i} className="relative group modern-card p-8 h-full transform transition-all duration-500 hover:scale-105 hover:-translate-y-2">
+              <div className="text-6xl mb-6">{step.icon}</div>
+              <h3 className="text-2xl font-bold mb-4 text-purple-800" style={{ fontWeight: 800 }}>{step.title}</h3>
+              <p className="text-gray-600 leading-relaxed font-medium">{step.desc}</p>
+              <div className="absolute top-4 right-4 text-2xl font-bold text-purple-200 opacity-40">
+                {String(i + 1).padStart(2, '0')}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
+      {/* Features */}
+      <section id="features" className="relative max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-16 tour-step-10 modern-section" data-aos="fade-left">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 gradient-text" style={{ letterSpacing: '-1px' }}>Powerful Features</h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto font-medium">Everything you need to become your own repair expert</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, i) => (
+            <div key={i} className="relative group modern-card p-8 h-full transform transition-all duration-500 hover:scale-105 hover:-translate-y-2">
+              <div className="text-5xl mb-6">{feature.icon}</div>
+              <h3 className="text-xl font-bold mb-4 text-purple-800" style={{ fontWeight: 800 }}>{feature.title}</h3>
+              <p className="text-gray-600 leading-relaxed font-medium">{feature.desc}</p>
+              <div className="mt-6 flex items-center text-purple-500 group-hover:translate-x-2 transition-transform">
+                <span className="text-sm font-medium">Learn More</span>
+                <FaArrowRight className="ml-2 text-xs" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* FAQ */}
-      <section
-  id="faq"
-  className="max-w-7xl mx-auto px-4 sm:px-6 md:px-20 py-20"
-  data-aos="fade-up"
->
-  <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-[#38BDF8]">
-    Frequently Asked Questions
-  </h2>
-  <div className="transition-transform duration-300 ease-in-out rounded-xl">
-    <FAQAccordion faqs={faqs} />
-  </div>
-</section>
+      <section id="faq" className="relative max-w-7xl mx-auto px-2 sm:px-4 md:px-8 py-16 modern-section" data-aos="fade-up">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 gradient-text" style={{ letterSpacing: '-1px' }}>Frequently Asked Questions</h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto font-medium">Everything you need to know about Refixly</p>
+        </div>
+        <div className="glass-effect rounded-3xl p-6 sm:p-8">
+          <FAQAccordion faqs={faqs} />
+        </div>
+      </section>
 
       {/* Call To Action */}
-      <section id="ready" className="bg-[#130b29] py-20 text-center tour-step-12" data-aos="zoom-in">
-        <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-[#38BDF8]">Ready to Fix it Yourself?</h2>
-        <p className="text-[#94A3B8] max-w-xl mx-auto mb-8">Join thousands of users who are repairing with confidence using Refixly.</p>
-        <Link
-          to="/login"
-          className="inline-block px-10 py-3 bg-[#38BDF8] text-black font-semibold rounded-full transform transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-[0_0px_12px_white] hover:bg-[#38BDF8]"
-        >
-          Get Started Now
-        </Link>
+      <section id="ready" className="relative py-16 sm:py-20 text-center tour-step-12 modern-section" data-aos="zoom-in">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4">
+          <div className="glass-effect rounded-3xl p-8 sm:p-12">
+            <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 gradient-text" style={{ letterSpacing: '-1px' }}>Ready to Fix it Yourself?</h2>
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto font-medium">
+              Join thousands of users who are repairing with confidence using Refixly.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/login">
+                <button className="modern-cta relative px-10 py-4 font-semibold rounded-full transition-all duration-300 transform flex items-center mx-auto sm:mx-0">
+                  <span>Get Started Now</span>
+                  <FaArrowRight className="ml-2" />
+                </button>
+              </Link>
+              <button className="modern-cta px-10 py-4 font-semibold rounded-full border-2 border-purple-200 bg-white text-purple-700 hover:bg-purple-50 hover:text-purple-900 transition-all duration-300 flex items-center justify-center shadow-none">
+                <FaUsers className="mr-2" />
+                <span>Join Community</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
