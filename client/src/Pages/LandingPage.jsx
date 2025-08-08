@@ -11,9 +11,17 @@ import FAQAccordion from '../components/FAQAccordion';
 const Home = () => {
   const [showTour, setShowTour] = useState(false);
 
+  const closeTour = () => {
+    localStorage.setItem('hasSeenTour', 'true');
+    setShowTour(false);
+  };
+
+
   useEffect(() => {
     // Always show the tour after DOM is ready
-    setTimeout(() => setShowTour(true), 300);
+    if (!localStorage.getItem("hasSeenTour")){
+      setTimeout(() => setShowTour(true), 300);
+    }
   }, []);
 
   useEffect(() => {
@@ -74,7 +82,7 @@ const Home = () => {
         {/* Remove animated background blobs */}
       </div>
 
-      {showTour && <Tour onClose={() => setShowTour(false)} auto={true} />}
+      {showTour && <Tour onClose={closeTour} auto={true} />}
 
       <style>{`
         .faq-glow {
