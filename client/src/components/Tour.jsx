@@ -168,46 +168,48 @@ const Tour = ({ onClose, auto = false }) => {
   return (
     <>
       {/* Overlay */}
-      <div className="fixed inset-0 bg-black/40 z-50" style={{ pointerEvents: 'auto' }} />
+      <div className="fixed inset-0" style={{ background: 'rgba(124,58,237,0.06)', pointerEvents: 'auto', zIndex: 50 }} />
       {/* Highlighted element border */}
       <div
         style={{
           position: 'fixed',
-          top: targetRect.top - 6,
-          left: targetRect.left - 6,
-          width: targetRect.width + 12,
-          height: targetRect.height + 12,
-          border: '3px solid #38BDF8',
-          borderRadius: 12,
-          boxShadow: '0 0 16px 4px #38BDF8',
+          top: targetRect.top - 2,
+          left: targetRect.left - 2,
+          width: targetRect.width + 4,
+          height: targetRect.height + 4,
+          border: '2px solid #a78bfa',
+          borderRadius: 14,
+          boxShadow: '0 2px 8px 0 rgba(124,58,237,0.06)',
           zIndex: 10003,
           pointerEvents: 'none',
         }}
       />
       {/* Arrow */}
-      <svg width="24" height="24" style={arrowStyle}>
-        <polygon points="12,0 24,24 0,24" fill="#38BDF8" />
+      <svg width="24" height="12" style={{ ...arrowStyle, top: Math.max(arrowStyle.top - 8, 88) }}>
+        <polygon points="12,0 24,12 0,12" fill="#e9d5ff" />
       </svg>
       {/* Popover */}
-      <div ref={popoverRef} style={popoverStyle} className="z-50 bg-white text-gray-900 rounded-2xl shadow-2xl p-6 flex flex-col items-start border border-blue-200">
-        <div className="flex w-full justify-between items-center mb-2">
-          <h2 className="text-lg font-bold text-[#38BDF8]">{steps[step].title}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-xl ml-4">&times;</button>
+      <div ref={popoverRef} style={{ ...popoverStyle, top: Math.max(popoverStyle.top, 88) }} className="z-50 bg-white text-gray-900 rounded-2xl shadow-md p-7 flex flex-col items-start border border-[#e9d5ff]" >
+        <div className="flex w-full justify-between items-start mb-2">
+          <h2 className="text-2xl font-extrabold text-[#7c3aed] mb-2 text-left" style={{ lineHeight: 1.15 }}>{steps[step].title}</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-2xl ml-4 font-bold">&times;</button>
         </div>
-        <div className="mb-4 text-sm">{steps[step].content}</div>
-        <div className="flex items-center w-full justify-between mt-2">
-          <span className="text-xs text-gray-500">{step + 1} of {steps.length}</span>
-          <div className="flex gap-2">
+        <div className="mb-6 text-base text-[#6b7280] text-left leading-relaxed" style={{ fontWeight: 500 }}>{steps[step].content}</div>
+        <div className="flex flex-col w-full gap-2 mt-2">
+          <span className="text-xs text-gray-400 mb-1">{step + 1} of {steps.length}</span>
+          <div className="flex gap-2 w-full">
             <button
               onClick={onClose}
-              className="px-3 py-1 rounded border text-sm bg-white border-blue-300 text-blue-600 hover:bg-blue-50"
+              className="px-0 py-2 text-[#7c3aed] text-base font-semibold bg-transparent rounded-lg hover:underline focus:outline-none"
+              style={{ minWidth: 60 }}
             >
               Skip
             </button>
             <button
               onClick={() => setStep(findNextVisibleStep(step, -1))}
               disabled={step === findNextVisibleStep(0, 1)}
-              className={`px-3 py-1 rounded border text-sm ${step === findNextVisibleStep(0, 1) ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-white border-blue-300 text-blue-600 hover:bg-blue-50'}`}
+              className={`px-0 py-2 text-base font-semibold bg-transparent rounded-lg focus:outline-none ${step === findNextVisibleStep(0, 1) ? 'text-gray-300 cursor-not-allowed' : 'text-[#7c3aed] hover:underline'}`}
+              style={{ minWidth: 90 }}
             >
               &#8592; Previous
             </button>
@@ -217,7 +219,8 @@ const Tour = ({ onClose, auto = false }) => {
                 if (next === step) onClose();
                 else setStep(next);
               }}
-              className="px-3 py-1 rounded border text-sm bg-white border-blue-300 text-blue-600 hover:bg-blue-50"
+              className="px-6 py-2 rounded-lg bg-[#7c3aed] text-white text-base font-semibold shadow-sm hover:bg-[#6d28d9] focus:outline-none"
+              style={{ minWidth: 90 }}
             >
               {findNextVisibleStep(step, 1) === step ? 'Finish' : 'Next →'}
             </button>
