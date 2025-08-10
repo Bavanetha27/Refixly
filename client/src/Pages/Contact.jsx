@@ -117,13 +117,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-[#1E293B] py-8 text-center text-[#94A3B8]">
-        <div className="max-w-4xl mx-auto px-6">
-          <p>&copy; 2025 Refixly. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };
