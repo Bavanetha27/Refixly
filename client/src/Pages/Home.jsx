@@ -56,7 +56,7 @@ const UserHome = () => {
   }
 
   return (
-    <div className="bg-gradient-to-b from-[#2918cc] to-[#7541dc] text-gray-900">
+    <div className="bg-gradient-to-b from-[#2918cc] to-[#7541dc] text-gray-900 w-full overflow-x-hidden overflow-y-hidden">
       <Navbar />
 
       {/* Hero Section */}
