@@ -9,9 +9,9 @@ const HomeFAQ = ({ faqs }) => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-[#2918cc] to-[#7541dc] py-20 px-6 max-w-4xl mx-auto" data-aos="zoom-in">
+    <section className="py-20 px-6 max-w-4xl mx-auto" data-aos="zoom-in">
       <h2
-        className="text-4xl font-bold mb-14 text-center text-blue-900"
+        className="text-4xl font-bold mb-14 text-center text-blue-50"
         data-aos="fade-left"
       >
         Frequently Asked Questions
@@ -21,14 +21,14 @@ const HomeFAQ = ({ faqs }) => {
         {faqs.map((faq, i) => (
           <div
             key={i}
-            className="bg-gradient-to-b from-[#2918cc] to-[#7541dc] border border-blue-300 rounded-lg p-5 cursor-pointer hover:bg-blue-50 transition-all duration-300"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 cursor-pointer hover:bg-white/20 transition-all duration-300"
             onClick={() => toggle(i)}
             data-aos="fade-up"
             data-aos-delay={i * 150}
           >
             <div className="flex justify-between items-center ">
-              <h3 className="text-lg font-semibold text-blue-700">{faq.q}</h3>
-              <span className="text-2xl text-blue-600 font-bold">
+              <h3 className="text-lg font-semibold text-white">{faq.q}</h3>
+              <span className="text-2xl text-white font-bold">
                 {openIndex === i ? "−" : "+"}
               </span>
             </div>
@@ -42,7 +42,7 @@ const HomeFAQ = ({ faqs }) => {
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  <p className="mt-3 text-gray-700">{faq.a}</p>
+                  <p className="mt-3 text-blue-100 leading-relaxed">{faq.a}</p>
                 </motion.div>
               )}
             </AnimatePresence>
