@@ -4,7 +4,7 @@ import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 import NavBar from '../components/NavBar';
 import toast from 'react-hot-toast';
 import { Loader, History, Bookmark, Wrench, X, Trash2 } from 'lucide-react';
-import defaultAvatar from '../assets/Avatar.avif'; // Make sure this path is correct
+import defaultAvatar from '../assets/Avatar.avif';
 
 const myRepairs = [
     { id: 1, item: 'iPhone 12', status: 'Completed', date: '2025-07-28' },
@@ -18,6 +18,7 @@ const ProfilePage = () => {
   const [searchHistory, setSearchHistory] = useState([]);
   const [savedTutorials, setSavedTutorials] = useState([]);
   const [displayName, setDisplayName] = useState('');
+  const [debouncedDisplayName, setDebouncedDisplayName] = useState('');
 
   useEffect(() => {
     const loadActivityData = () => {
@@ -30,6 +31,7 @@ const ProfilePage = () => {
       if (currentUser) {
         setUser(currentUser);
         setDisplayName(currentUser.displayName || '');
+        setDebouncedDisplayName(currentUser.displayName || '');
       } else {
         setUser(null);
       }
@@ -43,6 +45,17 @@ const ProfilePage = () => {
       window.removeEventListener('focus', loadActivityData);
     };
   }, []);
+
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedDisplayName(displayName);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [displayName]);
 
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
@@ -135,7 +148,7 @@ const ProfilePage = () => {
                 className="w-24 h-24 rounded-full border-4 border-blue-400 object-cover"
               />
               <div>
-                <p className="text-2xl font-bold">{isEditing ? displayName : user.displayName || 'No Name'}</p>
+                <p className="text-2xl font-bold">{isEditing ? debouncedDisplayName : user.displayName || 'No Name'}</p>
                 <p className="text-gray-400">{user.email}</p>
               </div>
             </div>
