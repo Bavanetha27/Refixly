@@ -4,6 +4,27 @@
 
 ---
 
+<details>
+  <summary><strong>📑 Table of Contents</strong></summary>
+
+- [🎯 Project Vision](#-project-vision)
+- [📦 Tech Stack Overview](#-tech-stack-overview)
+- [📁 Project Structure](#-project-structure)
+- [🚀 Getting Started](#-getting-started)
+- [🧠 AI Model (Planned)](#-ai-model-planned)
+- [🌐 Live Demo](#-live-demo)
+- [🧑‍💻 How to Contribute](#-how-to-contribute)
+- [✅ Guidelines](#-guidelines)
+- [📄 License](#-license)
+- [🙌 Acknowledgements](#-acknowledgements)
+- [📬 Contact](#-contact)
+
+
+</details>
+
+---
+
+
 ## 🎯 Project Vision
 
 Refixly's ultimate goal is to allow users to:
