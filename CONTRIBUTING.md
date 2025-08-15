@@ -1,148 +1,144 @@
-# Contributing to FinTrack
+# Contributing to Refixly
 
-Thank you for your interest in contributing to FinTrack!. We welcome contributions from developers of all skill levels. This guide will help you get started.
+We love your input! We want to make contributing to Refixly as easy and transparent as possible, whether it's:
 
-## How to Contribute
+- Reporting a bug
+- Discussing the current state of the code
+- Submitting a fix
+- Proposing new features
+- Becoming a maintainer
 
-### 1. Fork and Clone
-1. Fork the repository on GitHub
-2. Clone your fork locally:
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ and npm 8+
+- Git
+
+### Setup Development Environment
+
+1. **Fork and Clone**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/refixly.git
+   cd refixly
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm run install:all
+   ```
+
+3. **Environment Setup**
+   ```bash
+   cp env.example .env
+   # Edit .env with your configuration
+   ```
+
+4. **Start Development Servers**
+   ```bash
+   npm run dev
+   ```
+
+## 🧪 Testing
+
+### Run All Tests
 ```bash
-git clone https://github.com/Bavanetha27/Refixly
-cd Refixly
+npm run test
 ```
 
-### 2. Set Up Development Environment
-1. Install Node.js (version 16 or higher)
-2. Install dependencies:
+### Run Tests with Coverage
 ```bash
-npm install
-```
-3. Create a `.env` file with the required environment variables see [`.env.example`](.env.example)
-4. Start the development server:
-```bash
-npm run dev
+npm run test:coverage
 ```
 
-### 3. Create a Branch
-Create a new branch for your feature or bug fix:
+### Run Tests in Watch Mode
+```bash
+# Client tests
+npm run test:client
+
+# Server tests  
+npm run test:server
+```
+
+## 🔍 Code Quality
+
+### Linting
+```bash
+# Check for linting issues
+npm run lint
+
+# Fix auto-fixable issues
+npm run lint:fix
+```
+
+### Formatting
+```bash
+# Format all files
+npm run format
+
+# Check formatting
+npm run format:check
+```
+
+## 📝 Development Workflow
+
+### 1. Create a Feature Branch
 ```bash
 git checkout -b feature/your-feature-name
-# or
-git checkout -b fix/bug-description
 ```
 
-## Types of Contributions
+### 2. Make Your Changes
+- Write your code
+- Add tests for new functionality
+- Update documentation if needed
 
-### 🐛 Bug Fixes
-- Look for issues labeled `bug` or `good first issue`
-- Include steps to reproduce the bug in your PR description
-- Add tests if applicable
-
-### ✨ New Features
-- Check existing issues or create a new issue to discuss the feature
-- Follow the existing code patterns and architecture
-- Update documentation as needed
-
-### 📚 Documentation
-- Improve README.md, code comments, or inline documentation
-- Add examples and use cases
-- Fix typos and grammar issues
-
-### 🎨 UI/UX Improvements
-- Look for issues labeled `design-needed` or `ui/ux`
-- Ensure changes are responsive and accessible
-- Follow the existing Tailwind CSS patterns
-
-### 🧪 Testing
-- Add unit tests for new features
-- Improve test coverage
-- Fix failing tests
-
-## Code Style Guidelines
-
-### JavaScript/React
-- Use functional components with hooks
-- Follow ESLint rules (run `npm run lint`)
-- Use descriptive variable and function names
-- Add comments for complex logic
-
-### CSS/Styling
-- Use Tailwind CSS classes
-- Follow mobile-first responsive design
-- Maintain consistent spacing and typography
-
-### File Structure
-- Place components in appropriate directories
-- Use clear, descriptive file names
-- Keep components small and focused
-
-## Commit Message Guidelines
-
-Use clear and descriptive commit messages:
-
-```
-feat: add QR scan component
-fix: resolve technician dashboard issue
-docs: update contributing guidelines
-style: refactor layout with Tailwind CSS
-test: add unit test for booking form
+### 3. Quality Checks
+```bash
+# Run all quality checks
+npm run lint
+npm run test
+npm run format:check
 ```
 
-Types:
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation
-- `style`: UI/UX changes
-- `test`: Adding tests
-- `refactor`: Code refactoring
+### 4. Commit Your Changes
+```bash
+git add .
+git commit -m "feat: add your feature description"
+```
 
-## Pull Request Process
+### 5. Push and Create PR
+```bash
+git push origin feature/your-feature-name
+```
+
+## 📋 Pull Request Guidelines
 
 ### Before Submitting
-1. Test your changes thoroughly
-2. Run `npm run lint` and fix any issues
-3. Update documentation if needed
-4. Ensure your branch is up to date with main
-5. **Include a screenshot or screen recording of your changes** when submitting a PR. This helps us review and merge your work more efficiently.
+- [ ] All tests pass
+- [ ] Code is linted and formatted
+- [ ] Documentation is updated
+- [ ] No console.log statements in production code
+- [ ] Environment variables are properly configured
 
-### PR Description Template
-```markdown
-## Description
-Brief description of changes
+### PR Template
+Use the provided PR template and fill in all sections:
+- Description of changes
+- Type of change (bug fix, feature, etc.)
+- Testing instructions
+- Screenshots (if applicable)
 
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Documentation update
-- [ ] UI/UX improvement
+## 🐛 Bug Reports
 
-## Testing
-- [ ] Tested locally
-- [ ] No console errors
-- [ ] Responsive design verified
+### Creating a Bug Report
+1. Use the bug report template
+2. Provide detailed reproduction steps
+3. Include expected vs actual behavior
+4. Add screenshots/videos if applicable
+5. Specify your environment (OS, browser, Node version)
 
-## Screenshots (if applicable)
-Add screenshots for UI changes
-
-## Checklist
-- [ ] Code follows project style guidelines
-- [ ] Self-review completed
-- [ ] Documentation updated
-```
-
-### Review Process
-1. Maintainers will review your PR
-2. Address any requested changes
-3. Once approved, your PR will be merged
-
-## Issue Guidelines
-
-### Reporting Bugs
-Use the following template:
+### Example Bug Report
 ```markdown
 **Bug Description**
-A clear description of the bug
+Brief description of the issue
 
 **Steps to Reproduce**
 1. Go to '...'
@@ -152,56 +148,141 @@ A clear description of the bug
 **Expected Behavior**
 What should happen
 
-**Screenshots**
-If applicable
+**Actual Behavior**
+What actually happens
 
 **Environment**
-- OS: [e.g., Windows, macOS, Linux]
-- Browser: [e.g., Chrome, Firefox]
-- Version: [e.g., 22]
+- OS: Windows 10
+- Browser: Chrome 120
+- Node: 18.17.0
 ```
 
-### Feature Requests
-```markdown
-**Feature Description**
-Clear description of the proposed feature
+## ✨ Feature Requests
 
-**Problem it Solves**
-What problem does this solve?
+### Creating a Feature Request
+1. Use the feature request template
+2. Describe the problem you're solving
+3. Propose a solution
+4. Consider implementation complexity
+5. Discuss alternatives
 
-**Proposed Solution**
-How should this be implemented?
+## 🏗️ Project Structure
 
-**Additional Context**
-Any other relevant information
+```
+refixly/
+├── client/                 # React Frontend
+│   ├── src/
+│   │   ├── components/     # Reusable components
+│   │   ├── Pages/         # Page components
+│   │   ├── hooks/         # Custom React hooks
+│   │   └── test/          # Test files
+│   ├── vitest.config.js   # Test configuration
+│   └── package.json
+├── server/                # Node.js Backend
+│   ├── Controllers/       # Route controllers
+│   ├── routes/           # API routes
+│   ├── test/             # Test files
+│   ├── jest.config.js    # Test configuration
+│   └── package.json
+├── .github/              # GitHub workflows
+├── .prettierrc          # Code formatting
+├── package.json         # Root package.json
+└── README.md
 ```
 
-## Development Tips
+## 🎯 Good First Issues
 
-### Firebase Configuration
-- Do not commit any API keys or credentials
-- Use your own Firebase project while developing
-- Follow security rules and permissions
+Look for issues labeled with:
+- `good first issue`
+- `help wanted`
+- `beginner-friendly`
 
-### AI/ML Features (Future Scope)
-- Test AI features like model predictions thoroughly
-- Ensure fallback UI when APIs fail
-- Optimize loading for AI-based components
+### Suggested First Contributions
+- Add unit tests for existing components
+- Improve documentation
+- Fix minor UI issues
+- Add error handling
+- Implement accessibility improvements
 
-### Performance
-- Use lazy loading where applicable
-- Avoid unnecessary re-renders
-- Optimize API calls and state updates
+## 🔧 Development Tools
 
-## Getting Help
+### Recommended VS Code Extensions
+- ESLint
+- Prettier
+- Jest Runner
+- GitLens
+- Auto Rename Tag
 
-- Check existing issues and documentation first
-- Ask questions in GitHub issues
+### VS Code Settings
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript", "javascriptreact"]
+}
+```
 
-## Code of Conduct
+## 📚 Code Style Guide
 
-Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+### JavaScript/React
+- Use functional components with hooks
+- Prefer const over let
+- Use template literals for string interpolation
+- Use destructuring for props and state
+- Add PropTypes or TypeScript for type checking
+
+### Naming Conventions
+- Components: PascalCase (e.g., `UserProfile`)
+- Files: PascalCase for components, camelCase for utilities
+- Variables: camelCase
+- Constants: UPPER_SNAKE_CASE
+
+### Comments
+- Use JSDoc for function documentation
+- Add inline comments for complex logic
+- Keep comments up to date with code changes
+
+## 🚨 Common Issues
+
+### Build Failures
+- Check Node.js version compatibility
+- Clear node_modules and reinstall
+- Verify environment variables
+
+### Test Failures
+- Run tests locally before pushing
+- Check for flaky tests
+- Verify test environment setup
+
+### Linting Errors
+- Use `npm run lint:fix` for auto-fixable issues
+- Check ESLint configuration
+- Verify Prettier integration
+
+## 🤝 Community Guidelines
+
+### Communication
+- Be respectful and inclusive
+- Use clear, constructive language
+- Ask questions when unsure
+- Help others learn
+
+### Code Reviews
+- Be constructive and specific
+- Focus on the code, not the person
+- Suggest improvements respectfully
+- Celebrate good work
+
+## 📄 License
+
+By contributing, you agree that your contributions will be licensed under the MIT License.
+
+## 🙏 Acknowledgments
+
+Thank you for contributing to Refixly! Your efforts help make this project better for everyone.
 
 ---
 
-Thank you for contributing to FinTrack! Your contributions help make personal finance management accessible to everyone.
+**Need Help?** Open an issue or reach out to the maintainers!
