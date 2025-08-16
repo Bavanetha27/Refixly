@@ -1,0 +1,61 @@
+{
+  "name": "refixly",
+  "version": "1.0.0",
+  "description": "AI + AR Powered DIY Repair Assistant",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "test": "npm run test:client && npm run test:server",
+    "test:client": "cd client && npm run test",
+    "test:server": "cd server && npm run test",
+    "lint": "npm run lint:client && npm run lint:server",
+    "lint:client": "cd client && npm run lint",
+    "lint:server": "cd server && npm run lint",
+    "lint:fix": "npm run lint:fix:client && npm run lint:fix:server",
+    "lint:fix:client": "cd client && npm run lint:fix",
+    "lint:fix:server": "cd server && npm run lint:fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "clean": "npm run clean:client && npm run clean:server",
+    "clean:client": "cd client && rm -rf node_modules dist",
+    "clean:server": "cd server && rm -rf node_modules dist"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "ai",
+    "ar",
+    "repair",
+    "diy",
+    "computer-vision",
+    "tensorflow",
+    "react",
+    "nodejs"
+  ],
+  "author": "Bavanetha M R",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bavanetha27/refixly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bavanetha27/refixly/issues"
+  },
+  "homepage": "https://github.com/Bavanetha27/refixly#readme"
+}
