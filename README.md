@@ -53,7 +53,7 @@
 
 **🌟 Exciting News...**
 
-🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💃🎉💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow Flavor-ai! Let’s make learning and career development smarter – together! 🌟👨‍💻👩‍💻
+🚀 This project is now an official part of GirlScript Summer of Code – GSSoC'25! 💃🎉💻 We're thrilled to welcome contributors from all over India and beyond to collaborate, build, and grow Refixly! Let’s make learning and career development smarter – together! 🌟👨‍💻👩‍💻
 
 👩‍💻 GSSoC is one of India’s **largest 3-month-long open-source programs** that encourages developers of all levels to contribute to real-world projects 🌍 while learning, collaborating, and growing together. 🌱
 
@@ -64,7 +64,7 @@
 - 🏆 Get recognized for their work
 - 📜 Receive certificates and swag!
 
-🎉 **I can’t wait to welcome new contributors** from GSSoC 2025 to this Flavor-ai project family! Let's build, learn, and grow together — one commit at a time. 🔥👨‍💻👩‍💻
+🎉 **I can’t wait to welcome new contributors** from GSSoC 2025 to this Refixly project family! Let's build, learn, and grow together — one commit at a time. 🔥👨‍💻👩‍💻
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="100%">
 
@@ -83,6 +83,8 @@
 - [🙌 Acknowledgements](#-acknowledgements)
 - [📬 Contact](#-contact)
 </details>
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ## 🎯 Project Vision
 
@@ -126,7 +128,7 @@ Here’s a complete breakdown of the technologies used (or planned) for Refixly.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-###🔐 Authentication (Planned)
+***🔐 Authentication (Planned)***
 
 | Tech                  | Purpose |
 |-----------------------|---------|
@@ -134,7 +136,7 @@ Here’s a complete breakdown of the technologies used (or planned) for Refixly.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-###🕶️ AR Integration (Future Enhancement)
+***🕶️ AR Integration (Future Enhancement)***
 
 | Tech                  | Purpose |
 |-----------------------|---------|
@@ -143,7 +145,7 @@ Here’s a complete breakdown of the technologies used (or planned) for Refixly.
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-###📦 Dev Tools & Hosting
+***📦 Dev Tools & Hosting***
 
 | Tool/Service      | Purpose |
 |-------------------|---------|
@@ -254,25 +256,27 @@ We welcome open source contributors to build Refixly together!
 
 ***📌 Contribution Steps:***
 
-1. Fork this repository
-2. Create a branch: `git checkout -b feature/your-feature-name`
-3. Make your changes
-4. Commit: `git commit -m "Added X feature"`
-5. Push to your fork
-6. Create a Pull Request
+* Fork this repository
+* Create a branch: `git checkout -b feature/your-feature-name`
+* Make your changes
+* Commit: `git commit -m "Added X feature"`
+* Push to your fork
+* Create a Pull Request
+
+![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
 ***📖 Good First Issues***
 
 Check the [Issues](https://github.com/yourusername/refixly/issues) tab for beginner-friendly contributions like:
 
-      -  Add "About" or "Tutorials" pages
-      - Setup MongoDB models
-      - Create AR component placeholder
-      - Integrate TensorFlow\.js
+ *Add "About" or "Tutorials" pages
+* Setup MongoDB models
+* Create AR component placeholder
+* Integrate TensorFlow\.js
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-##✅ Guidelines
+**✅ Guidelines**
 
 - Follow consistent naming and code formatting
 - Use comments where necessary
