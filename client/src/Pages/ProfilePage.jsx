@@ -46,15 +46,9 @@ const ProfilePage = () => {
     };
   }, []);
 
-
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedDisplayName(displayName);
-    }, 300);
-
-    return () => {
-      clearTimeout(handler);
-    };
+    const handler = setTimeout(() => setDebouncedDisplayName(displayName), 300);
+    return () => clearTimeout(handler);
   }, [displayName]);
 
   const handleProfileUpdate = async (e) => {
@@ -63,16 +57,14 @@ const ProfilePage = () => {
 
     const loadingToast = toast.loading('Updating profile...');
     try {
-      await updateProfile(user, {
-        displayName: displayName,
-      });
+      await updateProfile(user, { displayName });
       toast.success('Profile updated successfully!', { id: loadingToast });
       setIsEditing(false);
     } catch (error) {
       toast.error(`Error: ${error.message}`, { id: loadingToast });
     }
   };
-  
+
   const handleRemoveTutorial = (videoId) => {
     const updatedSaved = savedTutorials.filter(t => t.videoId !== videoId);
     localStorage.setItem('refixly_savedTutorials', JSON.stringify(updatedSaved));
@@ -87,53 +79,119 @@ const ProfilePage = () => {
   };
 
   if (isLoading) {
-    return <div className="min-h-screen bg-gray-900 flex justify-center items-center"><Loader className="animate-spin text-white h-10 w-10" /></div>;
+    return (
+      <div className="min-h-screen bg-gray-900 flex justify-center items-center">
+        <Loader className="animate-spin text-white h-10 w-10" />
+      </div>
+    );
   }
+
   if (!user) {
-    return <div className="min-h-screen bg-gray-900 text-white"><NavBar /><div className="pt-24 text-center"><p>Please log in to view your profile.</p></div></div>;
+    return (
+      <div className="min-h-screen bg-gray-900 text-white">
+        <NavBar />
+        <div className="pt-24 text-center">
+          <p>Please log in to view your profile.</p>
+        </div>
+      </div>
+    );
   }
 
   const renderTabContent = () => {
     switch (activeTab) {
       case 'history':
-        return (
-          <div>
-            {searchHistory.length > 0 ? (
-              <>
-                <div className="flex justify-end mb-2">
-                  <button onClick={handleClearHistory} className="flex items-center gap-2 text-sm text-gray-400 hover:text-red-500 transition-colors">
-                    <Trash2 size={14} /> Clear History
-                  </button>
-                </div>
-                <ul>{searchHistory.map(item => <li key={item.id} className="flex justify-between p-3 border-b border-gray-700"><span>{item.term}</span><span className="text-gray-400">{item.date}</span></li>)}</ul>
-              </>
-            ) : (<p className="text-gray-400">Your scan history will appear here.</p>)}
-          </div>
+        return searchHistory.length > 0 ? (
+          <>
+            <div className="flex justify-end mb-2">
+              <button
+                onClick={handleClearHistory}
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-red-500 transition-colors"
+              >
+                <Trash2 size={14} /> Clear History
+              </button>
+            </div>
+            <ul>
+              {searchHistory.map(item => (
+                <li
+                  key={item.id}
+                  className="flex justify-between p-3 border-b border-gray-700 hover:bg-gray-700 transition-colors rounded"
+                >
+                  <span>{item.term}</span>
+                  <span className="text-gray-400">{item.date}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="text-gray-400">Your scan history will appear here.</p>
         );
+
       case 'saved':
         return savedTutorials.length > 0 ? (
           <div className="space-y-4">
             {savedTutorials.map(item => (
-              <div key={item.videoId} className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                <a href={`https://www.youtube.com/watch?v=${item.videoId}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-                  <img src={item.thumbnail} alt={item.title} className="w-24 h-16 object-cover rounded-md"/>
+              <div
+                key={item.videoId}
+                className="flex items-center justify-between p-3 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors"
+              >
+                <a
+                  href={`https://www.youtube.com/watch?v=${item.videoId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 group"
+                >
+                  <img
+                    src={item.thumbnail}
+                    alt={item.title}
+                    className="w-24 h-16 object-cover rounded-md"
+                  />
                   <span className="font-semibold group-hover:text-blue-400">{item.title}</span>
                 </a>
-                <button onClick={() => handleRemoveTutorial(item.videoId)} className="p-2 text-gray-400 hover:text-red-500 rounded-full hover:bg-gray-600">
+                <button
+                  onClick={() => handleRemoveTutorial(item.videoId)}
+                  className="p-2 text-gray-400 hover:text-red-500 rounded-full hover:bg-gray-600 transition-colors"
+                >
                   <X size={18} />
                 </button>
               </div>
             ))}
           </div>
-        ) : (<p className="text-gray-400">Your saved tutorials will appear here.</p>);
+        ) : (
+          <p className="text-gray-400">Your saved tutorials will appear here.</p>
+        );
+
       case 'repairs':
-        return <ul>{myRepairs.map(item => <li key={item.id} className="flex justify-between p-3 border-b border-gray-700"><span>{item.item}</span><span className={`font-semibold ${item.status === 'Completed' ? 'text-green-400' : 'text-yellow-400'}`}>{item.status}</span></li>)}</ul>;
+        return (
+          <ul>
+            {myRepairs.map(item => (
+              <li
+                key={item.id}
+                className="flex justify-between p-3 border-b border-gray-700 hover:bg-gray-700 transition-colors rounded"
+              >
+                <span>{item.item}</span>
+                <span
+                  className={`font-semibold ${
+                    item.status === 'Completed' ? 'text-green-400' : 'text-yellow-400'
+                  }`}
+                >
+                  {item.status}
+                </span>
+              </li>
+            ))}
+          </ul>
+        );
+
       default:
         return null;
     }
   };
-  
-  const tabButtonStyle = (tabName) => `flex items-center gap-2 px-4 py-2 font-semibold rounded-t-lg border-b-2 transition-colors ${activeTab === tabName ? 'border-blue-400 text-blue-400' : 'border-transparent text-gray-400 hover:text-white'}`;
+
+  const tabButtonStyle = (tabName) =>
+    `flex items-center gap-2 px-4 py-2 font-semibold rounded-t-lg border-b-2 transition-colors ${
+      activeTab === tabName
+        ? 'border-blue-400 text-blue-400'
+        : 'border-transparent text-gray-400 hover:text-white'
+    }`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white pt-24">
@@ -142,9 +200,9 @@ const ProfilePage = () => {
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
           <div className="flex justify-between items-start">
             <div className="flex items-center gap-4">
-              <img 
-                src={user.photoURL || defaultAvatar} 
-                alt="Profile" 
+              <img
+                src={user.photoURL || defaultAvatar}
+                alt="Profile"
                 className="w-24 h-24 rounded-full border-4 border-blue-400 object-cover"
               />
               <div>
@@ -153,40 +211,59 @@ const ProfilePage = () => {
               </div>
             </div>
             {!isEditing && (
-              <button onClick={() => setIsEditing(true)} className="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-lg font-semibold">
+              <button
+                onClick={() => setIsEditing(true)}
+                className="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-lg font-semibold transition-colors"
+              >
                 Edit Profile
               </button>
             )}
           </div>
+
           {isEditing && (
-            <form onSubmit={handleProfileUpdate} className="mt-6">
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="displayName" className="block text-sm font-medium text-gray-300">Display Name</label>
-                  <input
-                    type="text"
-                    id="displayName"
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                    className="w-full mt-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md"
-                  />
-                </div>
-                <div className="flex gap-4 pt-2">
-                  <button type="submit" className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg font-semibold">Save Changes</button>
-                  <button type="button" onClick={() => setIsEditing(false)} className="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-lg font-semibold">Cancel</button>
-                </div>
+            <form onSubmit={handleProfileUpdate} className="mt-6 space-y-4">
+              <div>
+                <label htmlFor="displayName" className="block text-sm font-medium text-gray-300">
+                  Display Name
+                </label>
+                <input
+                  type="text"
+                  id="displayName"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-white"
+                />
+              </div>
+              <div className="flex gap-4 pt-2">
+                <button type="submit" className="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg font-semibold transition-colors">
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsEditing(false)}
+                  className="bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded-lg font-semibold transition-colors"
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           )}
         </div>
-        
+
         <div className="border-b border-gray-700 mb-4">
           <nav className="-mb-px flex gap-6" aria-label="Tabs">
-            <button onClick={() => setActiveTab('history')} className={tabButtonStyle('history')}><History size={18}/> Search History</button>
-            <button onClick={() => setActiveTab('saved')} className={tabButtonStyle('saved')}><Bookmark size={18}/> Saved Tutorials</button>
-            <button onClick={() => setActiveTab('repairs')} className={tabButtonStyle('repairs')}><Wrench size={18}/> My Repairs</button>
+            <button onClick={() => setActiveTab('history')} className={tabButtonStyle('history')}>
+              <History size={18} /> Search History
+            </button>
+            <button onClick={() => setActiveTab('saved')} className={tabButtonStyle('saved')}>
+              <Bookmark size={18} /> Saved Tutorials
+            </button>
+            <button onClick={() => setActiveTab('repairs')} className={tabButtonStyle('repairs')}>
+              <Wrench size={18} /> My Repairs
+            </button>
           </nav>
         </div>
+
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg min-h-[200px]">
           {renderTabContent()}
         </div>
