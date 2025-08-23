@@ -54,25 +54,21 @@ const getElementRect = (selector) => {
   return el.getBoundingClientRect();
 };
 
-// Helper to find the next/prev available step with a visible selector
 const findNextVisibleStep = (from, direction = 1) => {
   let i = from + direction;
   while (i >= 0 && i < steps.length) {
     if (getElementRect(steps[i].selector)) return i;
     i += direction;
   }
-  return from; // fallback to current if none found
+  return from;
 };
 
 const Tour = ({ onClose, auto = false }) => {
   const [step, setStep] = useState(0);
   const [targetRect, setTargetRect] = useState(null);
   const popoverRef = useRef(null);
-
-  // Track the last valid step with a visible selector
   const [lastValidStep, setLastValidStep] = useState(0);
 
-  // Scroll to the highlighted element on step change
   useEffect(() => {
     const selector = steps[step].selector;
     const el = document.querySelector(selector);
@@ -98,15 +94,12 @@ const Tour = ({ onClose, auto = false }) => {
     };
   }, [step]);
 
-  // Prevent auto-advancing if next step is not visible; stay on last valid step
   useEffect(() => {
     if (steps[step].selector && !targetRect) {
-      // If no more valid steps ahead, stay on last valid step
       if (lastValidStep !== step) setStep(lastValidStep);
     }
   }, [targetRect, step, lastValidStep]);
 
-  // Auto-close if no target
   useEffect(() => {
     if (steps[step].selector && !targetRect) {
       const timeout = setTimeout(() => setStep((s) => (s < steps.length - 1 ? s + 1 : s)), 1000);
@@ -114,7 +107,6 @@ const Tour = ({ onClose, auto = false }) => {
     }
   }, [targetRect, step]);
 
-  // Auto show on first load
   useEffect(() => {
     if (auto && !localStorage.getItem('refixly_tour_shown')) {
       localStorage.setItem('refixly_tour_shown', 'true');
@@ -123,7 +115,6 @@ const Tour = ({ onClose, auto = false }) => {
 
   if (!targetRect) return null;
 
-  // Improved popover positioning for large sections
   let popoverStyle = {};
   if (targetRect) {
     const popoverHeight = 220;
@@ -131,19 +122,15 @@ const Tour = ({ onClose, auto = false }) => {
     const isLargeSection = targetRect.height > 300 || targetRect.width > 600;
     let top;
     if (isLargeSection) {
-      // Center vertically within the section
       top = targetRect.top + targetRect.height / 2 - popoverHeight / 2;
     } else {
-      // Default: below
       const spaceBelow = window.innerHeight - targetRect.bottom;
       const spaceAbove = targetRect.top;
       top = targetRect.bottom + 24;
-      // If not enough space below, show above
       if (spaceBelow < popoverHeight && spaceAbove > popoverHeight) {
         top = targetRect.top - popoverHeight - 24;
       }
     }
-    // Center horizontally for wide sections
     let left = targetRect.left + targetRect.width / 2 - popoverWidth / 2;
     left = Math.max(16, Math.min(left, window.innerWidth - popoverWidth - 16));
     popoverStyle = {
@@ -157,7 +144,6 @@ const Tour = ({ onClose, auto = false }) => {
     };
   }
 
-  // Arrow position
   const arrowStyle = {
     position: 'fixed',
     left: targetRect.left + targetRect.width / 2 - 12,
@@ -168,7 +154,8 @@ const Tour = ({ onClose, auto = false }) => {
   return (
     <>
       {/* Overlay */}
-      <div className="fixed inset-0" style={{ background: 'rgba(124,58,237,0.06)', pointerEvents: 'auto', zIndex: 50 }} />
+      <div className="fixed inset-0 bg-purple-100/10 dark:bg-gray-900/40 z-50 pointer-events-auto" />
+
       {/* Highlighted element border */}
       <div
         style={{
@@ -179,28 +166,41 @@ const Tour = ({ onClose, auto = false }) => {
           height: targetRect.height + 4,
           border: '2px solid #a78bfa',
           borderRadius: 14,
-          boxShadow: '0 2px 8px 0 rgba(124,58,237,0.06)',
+          boxShadow: '0 2px 8px rgba(124,58,237,0.2)',
           zIndex: 10003,
           pointerEvents: 'none',
         }}
+        className="dark:border-cyan-400"
       />
+
       {/* Arrow */}
       <svg width="24" height="12" style={{ ...arrowStyle, top: Math.max(arrowStyle.top - 8, 88) }}>
-        <polygon points="12,0 24,12 0,12" fill="#e9d5ff" />
+        <polygon points="12,0 24,12 0,12" className="fill-purple-200 dark:fill-cyan-400" />
       </svg>
+
       {/* Popover */}
-      <div ref={popoverRef} style={{ ...popoverStyle, top: Math.max(popoverStyle.top, 88) }} className="z-50 bg-white text-gray-900 rounded-2xl shadow-md p-7 flex flex-col items-start border border-[#e9d5ff]" >
+      <div
+        ref={popoverRef}
+        style={{ ...popoverStyle, top: Math.max(popoverStyle.top, 88) }}
+        className="z-50 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200 rounded-2xl shadow-md p-7 flex flex-col items-start border border-purple-100 dark:border-cyan-400"
+      >
         <div className="flex w-full justify-between items-start mb-2">
-          <h2 className="text-2xl font-extrabold text-[#7c3aed] mb-2 text-left" style={{ lineHeight: 1.15 }}>{steps[step].title}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-700 text-2xl ml-4 font-bold">&times;</button>
+          <h2 className="text-2xl font-extrabold text-purple-700 dark:text-cyan-400 mb-2 text-left" style={{ lineHeight: 1.15 }}>
+            {steps[step].title}
+          </h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-2xl ml-4 font-bold">
+            &times;
+          </button>
         </div>
-        <div className="mb-6 text-base text-[#6b7280] text-left leading-relaxed" style={{ fontWeight: 500 }}>{steps[step].content}</div>
+        <div className="mb-6 text-base text-gray-500 dark:text-gray-300 text-left leading-relaxed font-medium">
+          {steps[step].content}
+        </div>
         <div className="flex flex-col w-full gap-2 mt-2">
-          <span className="text-xs text-gray-400 mb-1">{step + 1} of {steps.length}</span>
+          <span className="text-xs text-gray-400 dark:text-gray-500 mb-1">{step + 1} of {steps.length}</span>
           <div className="flex gap-2 w-full">
             <button
               onClick={onClose}
-              className="px-0 py-2 text-[#7c3aed] text-base font-semibold bg-transparent rounded-lg hover:underline focus:outline-none"
+              className="px-0 py-2 text-purple-700 dark:text-cyan-400 text-base font-semibold bg-transparent rounded-lg hover:underline focus:outline-none"
               style={{ minWidth: 60 }}
             >
               Skip
@@ -208,8 +208,11 @@ const Tour = ({ onClose, auto = false }) => {
             <button
               onClick={() => setStep(findNextVisibleStep(step, -1))}
               disabled={step === findNextVisibleStep(0, 1)}
-              className={`px-0 py-2 text-base font-semibold bg-transparent rounded-lg focus:outline-none ${step === findNextVisibleStep(0, 1) ? 'text-gray-300 cursor-not-allowed' : 'text-[#7c3aed] hover:underline'}`}
-              style={{ minWidth: 90 }}
+              className={`px-0 py-2 text-base font-semibold bg-transparent rounded-lg focus:outline-none min-w-[90px] ${
+                step === findNextVisibleStep(0, 1)
+                  ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
+                  : 'text-purple-700 dark:text-cyan-400 hover:underline'
+              }`}
             >
               &#8592; Previous
             </button>
@@ -219,8 +222,7 @@ const Tour = ({ onClose, auto = false }) => {
                 if (next === step) onClose();
                 else setStep(next);
               }}
-              className="px-6 py-2 rounded-lg bg-[#7c3aed] text-white text-base font-semibold shadow-sm hover:bg-[#6d28d9] focus:outline-none"
-              style={{ minWidth: 90 }}
+              className="px-6 py-2 rounded-lg bg-purple-700 dark:bg-cyan-400 text-white dark:text-black text-base font-semibold shadow-sm hover:bg-purple-600 dark:hover:bg-cyan-300 focus:outline-none min-w-[90px]"
             >
               {findNextVisibleStep(step, 1) === step ? 'Finish' : 'Next →'}
             </button>
@@ -231,4 +233,4 @@ const Tour = ({ onClose, auto = false }) => {
   );
 };
 
-export default Tour; 
+export default Tour;

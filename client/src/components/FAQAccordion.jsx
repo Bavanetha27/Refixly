@@ -13,17 +13,19 @@ const FAQAccordion = ({ faqs }) => {
       {faqs.map((faq, i) => (
         <div
           key={i}
-          className={`bg-white rounded-2xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-lg border border-purple-100 ${openIndex === i
-              ? "ring-2 ring-purple-200 shadow-lg"
-              : "hover:ring-1 hover:ring-purple-200"
+          className={`bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-lg border border-purple-100 dark:border-purple-700 ${openIndex === i
+              ? "ring-2 ring-purple-200 dark:ring-purple-400 shadow-lg"
+              : "hover:ring-1 hover:ring-purple-200 dark:hover:ring-purple-400"
             }`}
         >
           <button
             onClick={() => toggle(i)}
             className="w-full flex justify-between items-center px-6 py-5 sm:py-6 text-left focus:outline-none"
           >
-            <h3 className="text-base sm:text-xl font-medium text-purple-800">{faq.q}</h3>
-            <span className="text-purple-500 text-2xl font-bold">
+            <h3 className="text-base sm:text-xl font-medium text-purple-800 dark:text-purple-300">
+              {faq.q}
+            </h3>
+            <span className="text-purple-500 dark:text-purple-400 text-2xl font-bold">
               {openIndex === i ? "−" : "+"}
             </span>
           </button>
@@ -37,7 +39,7 @@ const FAQAccordion = ({ faqs }) => {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                <div className="px-6 pb-6 pt-1 text-gray-600 text-sm sm:text-base leading-relaxed">
+                <div className="px-6 pb-6 pt-1 text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
                   {faq.a}
                 </div>
               </motion.div>

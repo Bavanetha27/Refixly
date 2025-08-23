@@ -43,11 +43,11 @@ const ScanPage = () => {
   }, [scanMode, isModelLoading]);
 
   useEffect(() => {
-  if (!isModelLoading) {
-    setScanMode('webcam');
-    enableWebcam();
-  }
-}, [isModelLoading]);
+    if (!isModelLoading) {
+      setScanMode('webcam');
+      enableWebcam();
+    }
+  }, [isModelLoading]);
 
   const enableWebcam = async () => {
     try {
@@ -108,16 +108,16 @@ const ScanPage = () => {
   };
 
   const buttonBaseStyle = "px-4 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2";
-  const activeButtonStyle = "bg-blue-600 text-white";
-  const inactiveButtonStyle = "bg-gray-700 text-gray-300 hover:bg-gray-600";
+  const activeButtonStyle = "bg-blue-600 text-white dark:bg-blue-500 dark:text-white";
+  const inactiveButtonStyle = "bg-gray-700 text-gray-300 hover:bg-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700";
 
   return (
-    <div className="h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] text-white pt-20 flex flex-col">
+    <div className="h-screen bg-gradient-to-b from-[#150617] via-[#132299] to-[#7541dc] dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 text-white pt-20 flex flex-col">
       <NavBar />
       <div className="flex-1 overflow-y-auto flex flex-col items-center p-4 sm:p-6">
         <div className="w-full max-w-4xl text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-400 drop-shadow-lg">AI Object Scanner</h1>
-          <p className="text-gray-400 mt-2 mb-6">Scan an object using your webcam or by uploading an image.</p>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-400 drop-shadow-lg dark:text-blue-300">AI Object Scanner</h1>
+          <p className="text-gray-400 dark:text-gray-300 mt-2 mb-6">Scan an object using your webcam or by uploading an image.</p>
           
           <div className="flex justify-center gap-4 mb-6">
             <button onClick={() => setScanMode('webcam')} className={`${buttonBaseStyle} ${scanMode === 'webcam' ? activeButtonStyle : inactiveButtonStyle}`}>
@@ -128,18 +128,23 @@ const ScanPage = () => {
             </button>
           </div>
           
-          <div className="w-full max-w-xl mx-auto aspect-video bg-gray-800 border-2 border-gray-700 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
+          <div className="w-full max-w-xl mx-auto aspect-video bg-gray-800 dark:bg-gray-900 border-2 border-gray-700 dark:border-gray-600 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
             {scanMode === 'webcam' ? (
-              videoRef.current?.srcObject ? (<video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />) 
-              : (<div className="text-center text-gray-400 p-6"> <Camera size={48} className="mx-auto mb-2" /> Please enable your camera to begin scanning. </div>)
+              videoRef.current?.srcObject ? (
+                <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
+              ) : (
+                <div className="text-center text-gray-400 dark:text-gray-400 p-6">
+                  <Camera size={48} className="mx-auto mb-2" /> Please enable your camera to begin scanning.
+                </div>
+              )
             ) : (
               <div className="flex flex-col items-center justify-center w-full h-full">
                 <input type="file" accept="image/*" onChange={handleImageUpload} ref={fileInputRef} className="hidden" />
                 {uploadedImage ? (
                   <img ref={imageRef} src={uploadedImage} alt="Uploaded for scanning" className="w-full h-full object-contain" />
                 ) : (
-                  <div className="text-center text-gray-400 p-6 hover:text-white transition-colors cursor-pointer" onClick={() => fileInputRef.current.click()} >
-                  <UploadCloud size={48} className="mx-auto mb-2" /> Please upload an image to start scanning.
+                  <div className="text-center text-gray-400 dark:text-gray-400 p-6 hover:text-white dark:hover:text-gray-200 transition-colors cursor-pointer" onClick={() => fileInputRef.current.click()} >
+                    <UploadCloud size={48} className="mx-auto mb-2" /> Please upload an image to start scanning.
                   </div>
                 )}
               </div>
@@ -149,16 +154,16 @@ const ScanPage = () => {
           <button
             onClick={() => performDetection(scanMode === 'webcam' ? videoRef.current : imageRef.current)}
             disabled={isModelLoading || isScanning || (scanMode === 'image' && !uploadedImage)}
-            className="mt-6 px-8 py-3 text-lg font-bold text-white bg-blue-600 rounded-full shadow-lg hover:bg-blue-500 disabled:bg-gray-500 disabled:cursor-not-allowed transition-all duration-300 flex items-center gap-3 mx-auto"
+            className="mt-6 px-8 py-3 text-lg font-bold text-white bg-blue-600 dark:bg-blue-500 rounded-full shadow-lg hover:bg-blue-500 dark:hover:bg-blue-400 disabled:bg-gray-500 disabled:dark:bg-gray-600 disabled:cursor-not-allowed transition-all duration-300 flex items-center gap-3 mx-auto"
           >
             {isModelLoading ? <><Loader className="animate-spin" />Loading Model...</> : isScanning ? <><Loader className="animate-spin" />Scanning...</> : 'Scan Now'}
           </button>
           
           {detectedObject && (
-            <div className="mt-8 p-6 bg-gray-800 rounded-2xl shadow-lg">
-              <h2 className="text-2xl font-bold">Detected Object: <span className="text-blue-400">{detectedObject}</span></h2>
+            <div className="mt-8 p-6 bg-gray-800 dark:bg-gray-900 rounded-2xl shadow-lg">
+              <h2 className="text-2xl font-bold text-white dark:text-gray-200">Detected Object: <span className="text-blue-400 dark:text-blue-300">{detectedObject}</span></h2>
               {detectedObject !== 'No object detected with high confidence.' && (
-                <button onClick={showTutorials} className="mt-4 px-6 py-2 font-semibold text-black bg-blue-400 rounded-full hover:bg-blue-300 transition-colors">
+                <button onClick={showTutorials} className="mt-4 px-6 py-2 font-semibold text-black dark:text-gray-900 bg-blue-400 dark:bg-blue-300 rounded-full hover:bg-blue-300 dark:hover:bg-blue-400 transition-colors">
                   Show Repair Tutorials
                 </button>
               )}
