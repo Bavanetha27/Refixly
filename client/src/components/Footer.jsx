@@ -145,6 +145,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <div className="text-center md:text-left text-xs text-gray-500 dark:text-gray-400">
               <p>© {currentYear} Refixly. Made with ❤️ All rights reserved.</p>
+              <p className="mt-1">Contact us: <a href="mailto:support@refixly.com" className="underline">support@refixly.com</a></p>
             </div>
             <div className="flex items-center space-x-4 text-xs">
               <Link
