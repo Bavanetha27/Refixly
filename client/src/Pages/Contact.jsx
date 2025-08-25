@@ -96,10 +96,7 @@ const Contact = () => {
       {/* Contact Info */}
       <section className="max-w-4xl mx-auto px-6 py-16 text-center" data-aos="fade-up">
         <div className="bg-[#334155] dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-          <div className="flex items-center justify-center mb-4">
-            <FaEnvelope className="text-2xl text-[#38BDF8] dark:text-cyan-400 mr-3" />
-            <span className="text-lg dark:text-gray-200">support@refixly.com</span>
-          </div>
+
           <p className="text-[#94A3B8] dark:text-gray-300 mb-6">
             We typically respond within 24 hours
           </p>
