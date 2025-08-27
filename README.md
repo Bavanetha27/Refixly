@@ -49,7 +49,7 @@
 
 <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="150%">
 
-![GSSoC Logo](/Refixly/client/public/gssoc%20logo.png)
+![GSSoC Logo](client/public/gssoc_logo.png)
 
 **🌟 Exciting News...**
 
