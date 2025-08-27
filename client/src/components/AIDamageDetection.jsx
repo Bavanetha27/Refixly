@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import axios from "axios";
 import AIResponseSection from "./AIResponseSection";
 

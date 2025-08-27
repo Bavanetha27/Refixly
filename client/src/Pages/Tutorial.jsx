@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import NavBar from "../components/NavBar";
 import { Loader, Bookmark, FileQuestion, XCircle, Filter } from "lucide-react";
 import toast from "react-hot-toast";
@@ -35,7 +35,7 @@ const Tutorial = () => {
       setRecentlyViewed(JSON.parse(storedRecentlyViewed));
     if (storedBookmarkedTutorials)
       setBookmarkedTutorials(JSON.parse(storedBookmarkedTutorials));
-  }, []);
+  }, [fetchTutorials]);
 
   useEffect(() => {
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
@@ -52,7 +52,7 @@ const Tutorial = () => {
     );
   }, [bookmarkedTutorials]);
 
-  const fetchTutorials = async (objectName, pageToken = "", append = false) => {
+  const fetchTutorials = useCallback(async (objectName, pageToken = "", append = false) => {
     if (!objectName.trim()) {
       setError("Please enter a search term or select a category.");
       setTutorials([]);
@@ -84,7 +84,9 @@ const Tutorial = () => {
     } finally {
       setLoading(false);
     }
-  };
+  },
+  [setError, setTutorials, setNextPageToken, setSearchHistory]
+);
 
   const handleSearch = (e) => {
     e.preventDefault();
