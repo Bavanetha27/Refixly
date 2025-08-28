@@ -17,8 +17,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
+
 
   const socialLinks = [
     {
@@ -89,7 +88,8 @@ const Footer = () => {
       ],
     },
   ];
-
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-300 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -100,7 +100,7 @@ const Footer = () => {
             <h2 className="text-xl font-bold gradient-text dark:text-white">
               Refixly
             </h2>
-            <p className="max-w-md text-sm leading-6 text-gray-700 dark:text-gray-300">
+            <p className="max-w-md text-sm leading-6 text-gray-700 dark:text-gray-200">
               Empowering you to become your own tech hero—snap a photo, diagnose the problem, and follow interactive guides to bring your devices back to life. Repair smarter, waste less, and join a community of fixers making the world more sustainable, one repair at a time.
             </p>
             <div className="flex space-x-4 mt-6">
@@ -110,6 +110,7 @@ const Footer = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                   aria-label={`Visit our ${social.name} page`}
                   className={`transition-colors duration-200 text-gray-500 dark:text-gray-400 ${social.color}`}
                 >
                   <social.icon className="w-5 h-5" />
