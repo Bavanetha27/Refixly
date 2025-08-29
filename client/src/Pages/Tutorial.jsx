@@ -35,7 +35,7 @@ const Tutorial = () => {
       setRecentlyViewed(JSON.parse(storedRecentlyViewed));
     if (storedBookmarkedTutorials)
       setBookmarkedTutorials(JSON.parse(storedBookmarkedTutorials));
-  }, []);
+  }, [fetchTutorials]);
 
   useEffect(() => {
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
@@ -84,7 +84,9 @@ const Tutorial = () => {
     } finally {
       setLoading(false);
     }
-  };
+  },
+  [setError, setTutorials, setNextPageToken, setSearchHistory]
+);
 
   const handleSearch = (e) => {
     e.preventDefault();

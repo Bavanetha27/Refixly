@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Loader, Search, Bookmark } from 'lucide-react';
 import NavBar from '../components/NavBar';
@@ -13,35 +13,59 @@ const TutorialsPage = () => {
   const [nextPageToken, setNextPageToken] = useState('');
   const [savedTutorials, setSavedTutorials] = useState([]); 
 
-  const fetchTutorials = async (loadMore = false) => {
-    setIsLoading(true);
-    setError(null);
-    if (!loadMore) {
-      setTutorials([]);
+  // const fetchTutorials = async (loadMore = false) => {
+  //   setIsLoading(true);
+  //   setError(null);
+  //   if (!loadMore) {
+  //     setTutorials([]);
+  //   }
+  //   try {
+  //     let apiUrl = `https://refixly.onrender.com/api/tutorials/${searchTerm}`;
+  //     if (loadMore && nextPageToken) {
+  //       apiUrl += `?pageToken=${nextPageToken}`;
+  //     }
+  //     const response = await fetch(apiUrl);
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch tutorials.');
+  //     }
+  //     const data = await response.json();
+  //     setTutorials(prev => loadMore ? [...prev, ...data.tutorials] : data.tutorials);
+  //     setNextPageToken(data.nextPageToken || '');
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+  const fetchTutorials = useCallback(async (loadMore = false) => {
+  setIsLoading(true);
+  setError(null);
+  if (!loadMore) {
+    setTutorials([]);
+  }
+  try {
+    let apiUrl = `https://refixly.onrender.com/api/tutorials/${searchTerm}`;
+    if (loadMore && nextPageToken) {
+      apiUrl += `?pageToken=${nextPageToken}`;
     }
-    try {
-      let apiUrl = `https://refixly.onrender.com/api/tutorials/${searchTerm}`;
-      if (loadMore && nextPageToken) {
-        apiUrl += `?pageToken=${nextPageToken}`;
-      }
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error('Failed to fetch tutorials.');
-      }
-      const data = await response.json();
-      setTutorials(prev => loadMore ? [...prev, ...data.tutorials] : data.tutorials);
-      setNextPageToken(data.nextPageToken || '');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error('Failed to fetch tutorials.');
     }
-  };
+    const data = await response.json();
+    setTutorials(prev => loadMore ? [...prev, ...data.tutorials] : data.tutorials);
+    setNextPageToken(data.nextPageToken || '');
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setIsLoading(false);
+  }
+}, [searchTerm, nextPageToken]);
 
   useEffect(() => {
     setSearchTerm(objectName);
     fetchTutorials();
-  }, [objectName]);
+  }, [objectName,fetchTutorials]);
 
   const handleSearch = (e) => {
     e.preventDefault();
