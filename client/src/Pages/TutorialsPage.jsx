@@ -88,7 +88,7 @@ const TutorialsPage = () => {
     }
 
     const updatedSaved = [tutorialToSave, ...saved];
-    localStorage.setItem('refixly_savedTutorials', JSON.stringify(updatedSaved));
+    localStorage.setItem('bookmarkedTutorials', JSON.stringify(updatedSaved));
     setSavedTutorials(updatedSaved);
     toast.success('Tutorial saved!');
   };
