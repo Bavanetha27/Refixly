@@ -1,6 +1,8 @@
 import {useState } from "react";
 import axios from "axios";
 import AIResponseSection from "./AIResponseSection";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AIDamageDetection = () => {
   const [deviceInfo, setDeviceInfo] = useState({
@@ -39,16 +41,24 @@ const AIDamageDetection = () => {
       });
 
       setAiResponse(res.data.reply); // assuming response includes a `reply` field
+      toast.success("Analysis completed successfully!", {
+      position: "top-right",
+      theme: "dark",
+      });
     } catch (error) {
       console.error('Error uploading:', error);
-      alert('Upload failed: ' + (error?.response?.data?.message || error.message));
-    } finally {
+      toast.error("Upload failed. Please try again.", {
+      position: "top-right",
+      theme: "dark",
+      });} 
+      finally {
       setIsSubmitting(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col px-4 pt-10 pb-20 font-sans text-gray-900 dark:text-gray-100">
+    <ToastContainer />
       <div className="text-center mb-6">
         <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">🔍 Device Damage Detector</h1>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">AI-powered diagnostics with repair suggestions</p>
