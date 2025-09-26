@@ -256,22 +256,6 @@ const UserHome = () => {
         <HomeFAQ faqs={faqs} darkMode={true} />
       </section>
 
-      {/* CTA */}
-      <section className="py-20 px-6 bg-gradient-to-b from-[#1E293B] to-[#0F172A] dark:from-gray-800 dark:to-gray-900 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-4xl font-bold mb-6 text-white dark:text-gray-200">Ready to start fixing smarter?</h3>
-          <p className="text-xl text-[#94A3B8] dark:text-gray-400 mb-10 max-w-2xl mx-auto">
-            Join thousands of users who trust Refixly to guide their DIY repair journeys.
-          </p>
-          <button 
-            className="bg-[#38BDF8] dark:bg-blue-400 text-white font-semibold px-10 py-4 rounded-full hover:bg-[#0EA5E9] dark:hover:bg-blue-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-            onClick={() => navigate('/signup')}
-          >
-            Get Started Now
-          </button>
-        </div>
-      </section>
-
     </div>
   );
 };
