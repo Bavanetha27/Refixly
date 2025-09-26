@@ -12,22 +12,31 @@ import { Loader2 } from 'lucide-react'
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prev) => !prev);
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setIsLoading(true)
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      toast.success('Signup Successful!');
-      navigate('/home');
+      if(password!=confirmPassword){
+        toast.error("Passwords doesn't match")
+      }else{
+        await createUserWithEmailAndPassword(auth, email, password);
+        toast.success('Signup Successful!');
+        navigate('/home');
+      }
     } catch (err) {
       toast.error(err.message);
     } finally {
@@ -87,6 +96,25 @@ const Signup = () => {
             </button>
           </div>
 
+          <div className="relative">
+            <span className="absolute left-3 top-4 text-gray-400"><FaLock /></span>
+            <input
+              type={showConfirmPassword ? 'text' : 'password'} // toggle type
+              placeholder="confirmPassword"
+              className="w-full py-3 pl-10 pr-10 rounded-full border border-gray-300 focus:outline-none"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              onClick={toggleConfirmPasswordVisibility}
+              className="absolute right-3 top-4 text-gray-400 focus:outline-none"
+              aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
           <button type="submit" className="w-full py-3 bg-gray-800 text-white font-semibold rounded-full hover:bg-gray-900">
             {isLoading ?
               <span className=' flex justify-center items-center'>
