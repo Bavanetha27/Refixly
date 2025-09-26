@@ -1,4 +1,5 @@
 import React from 'react';
+import { SiX } from "react-icons/si";
 import {
   Github,
   Linkedin,
@@ -23,7 +24,7 @@ import { Link } from "react-router-dom";
     {
       name: "Twitter",
       href: "https://x.com/yourhandle",
-      icon: Twitter,
+      icon: SiX,
       color: "hover:text-blue-500 dark:hover:text-blue-400",
     },
     {
