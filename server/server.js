@@ -23,17 +23,6 @@ app.get('/', (req, res) => {
 app.use('/api/tutorials', tutorialRoutes);
 app.use('/', aiDamageDetectRoutes);
 
-
-//error handling middleware
-app.use((req, res, next) => {
-  res.status(404).render('404.ejs', { user: { name: req.session.name || null } });
-});
-//global error handling middleware
-app.use((err,req, res, next) => {
-  console.error(err.stack);
-  res.status(500).render('error.ejs', { user: { name: req.session.name || null }, error: err });
-});
-
 // Define the port
 const PORT = process.env.PORT || 5000;
 
