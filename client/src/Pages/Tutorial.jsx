@@ -84,10 +84,8 @@ const Tutorial = () => {
     } finally {
       setLoading(false);
     }
-  },
-  [setError, setTutorials, setNextPageToken, setSearchHistory]
-);
-
+  }
+  
   const handleSearch = (e) => {
     e.preventDefault();
     setSelectedCategory("");
