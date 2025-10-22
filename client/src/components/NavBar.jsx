@@ -154,9 +154,10 @@ const NavBar = () => {
           <div className="hidden md:flex">
             <ThemeToggle />
           </div>
-
+          
           {/* Mobile Hamburger & Profile */}
           <div className="flex items-center gap-4 pr-2 sm:pr-4">
+            {/* hamburger */}
             <button
               className="md:hidden text-gray-900 dark:text-white focus:outline-none"
               aria-label="Toggle menu"
@@ -194,7 +195,7 @@ const NavBar = () => {
                 </svg>
               )}
             </button>
-
+          {/* profile dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={(e) => {
@@ -284,3 +285,5 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+

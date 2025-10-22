@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../index.css';
-import ScrollToTop from '../components/ScrollTop';
-import { FaTwitter, FaFacebookF, FaLinkedinIn, FaArrowRight, FaPlay, FaStar, FaUsers, FaShieldAlt } from 'react-icons/fa';
+import { FaArrowRight, FaPlay, FaStar, FaUsers} from 'react-icons/fa';
+import { IoMdArrowDropdown } from "react-icons/io";
 import Tour from '../components/Tour';
 import FAQAccordion from '../components/FAQAccordion';
 import ThemeToggle from '../components/ThemeToggle';
@@ -12,6 +12,7 @@ import ThemeToggle from '../components/ThemeToggle';
 
 const Home = () => {
   const [showTour, setShowTour] = useState(false);
+  const [toggleDropdown, setToggleDropdown]=useState(false)
 
   const closeTour = () => {
     localStorage.setItem('hasSeenTour', 'true');
@@ -154,7 +155,7 @@ const Home = () => {
 
 
       {/* Modern Header */}
-<header className="fixed top-0 left-0 right-0 z-50 w-full px-2 sm:px-4 md:px-8 py-4 bg-white dark:bg-gray-900 border-b border-purple-100 dark:border-gray-700 shadow-sm" data-aos="fade-down" style={{ backdropFilter: 'blur(8px)' }}>
+<header className="fixed top-0 left-0 right-0 z-50 w-full px-3 sm:px-4 py-3 bg-white dark:bg-gray-900 border-b border-purple-100 dark:border-gray-700 shadow-sm" data-aos="fade-down" style={{ backdropFilter: 'blur(8px)' }}>
   <div className="max-w-7xl mx-auto flex items-center justify-between">
     <Link to="/" className="group">
       <h1 className="text-3xl sm:text-4xl font-extrabold gradient-text hover:scale-105 transition-transform duration-300 tour-step-1">
@@ -162,10 +163,14 @@ const Home = () => {
       </h1>
     </Link>
 
-    <nav className="tour-step-navbar flex items-center">
-      <ul className="hidden md:flex items-center space-x-8 text-sm sm:text-base font-medium text-purple-700 dark:text-purple-300">
+  
+    <nav className="tour-step-navbar flex items-center gap-4 justify-evenly px-4">
+      <ul className={`${toggleDropdown? "flex flex-col items-left justify-evenly bg-white rounded-xl dark:bg-gray-900 absolute top-14 right-1 z-20 w-[55%] sm:w-[30%] h-72 py-3 px-6 md:px-0 md:py-1 shadow-xl shadow-purple-400 gap-4 md:gap-0":
+        "hidden"} md:h-auto md:w-auto md:static md:justify-normal md:flex md:flex-row md:items-center
+         md:py-1 md:space-x-8 text-sm sm:text-base font-medium text-purple-700 
+         dark:text-purple-300 md:shadow-none`}>
         {["how-it-works", "features", "faq", "ready"].map((id, i) => (
-          <li key={i}>
+          <li key={i} onClick={()=>setToggleDropdown(false)}>
             <a
               href={`#${id}`}
               className="relative group transition-all duration-300 hover:text-purple-500 dark:hover:text-purple-400"
@@ -182,20 +187,28 @@ const Home = () => {
             </a>
           </li>
         ))}
+
         <li>
-          <Link to="/signup" className="tour-step-2">
-            <button className="modern-cta relative px-8 py-3 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg group">
+      <Link to="/signup" className="tour-step-2">
+            <button className="modern-cta relative px-3 py-2 md:px-4 font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg group">
               <span className="relative z-10">Sign Up</span>
             </button>
-          </Link>
+        </Link>
         </li>
       </ul>
+      
 
+      {/* dropdown btn */}
+      <button className='md:hidden dark:text-purple-400'
+      onClick={()=>setToggleDropdown(!toggleDropdown)}>
+          <IoMdArrowDropdown size={"35px"}/>
+      </button>
       {/* Theme Toggle Button */}
-      <div className="ml-4 md:ml-6">
+      <div className="ml-0 md:ml-6">
         <ThemeToggle />
       </div>
     </nav>
+    
   </div>
 </header>
 
