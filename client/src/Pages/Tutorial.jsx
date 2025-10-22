@@ -24,69 +24,61 @@ const Tutorial = () => {
     { name: "Appliances", query: "home appliance repair" },
   ];
 
-  useEffect(() => {
-    const storedSearchHistory = localStorage.getItem("searchHistory");
-    const storedRecentlyViewed = localStorage.getItem("recentlyViewed");
-    const storedBookmarkedTutorials = localStorage.getItem(
-      "refixly_savedTutorials"
+useEffect(() => {
+  const storedSearchHistory = localStorage.getItem("searchHistory");
+  const storedRecentlyViewed = localStorage.getItem("recentlyViewed");
+  const storedBookmarkedTutorials = localStorage.getItem("refixly_savedTutorials");
+
+  if (storedSearchHistory) setSearchHistory(JSON.parse(storedSearchHistory));
+  if (storedRecentlyViewed) setRecentlyViewed(JSON.parse(storedRecentlyViewed));
+  if (storedBookmarkedTutorials) setBookmarkedTutorials(JSON.parse(storedBookmarkedTutorials));
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+}, [searchHistory]);
+
+useEffect(() => {
+  localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+}, [recentlyViewed]);
+
+useEffect(() => {
+  localStorage.setItem("refixly_savedTutorials", JSON.stringify(bookmarkedTutorials));
+}, [bookmarkedTutorials]);
+
+const fetchTutorials = useCallback(async (objectName, pageToken = "", append = false) => {
+  if (!objectName.trim()) {
+    setError("Please enter a search term or select a category.");
+    setTutorials([]);
+    setNextPageToken(null);
+    return;
+  }
+  setLoading(true);
+  setError(null);
+  try {
+    const res = await fetch(
+      `https://refixly.onrender.com/api/tutorials/${encodeURIComponent(objectName)}?pageToken=${pageToken}`
     );
-    if (storedSearchHistory) setSearchHistory(JSON.parse(storedSearchHistory));
-    if (storedRecentlyViewed)
-      setRecentlyViewed(JSON.parse(storedRecentlyViewed));
-    if (storedBookmarkedTutorials)
-      setBookmarkedTutorials(JSON.parse(storedBookmarkedTutorials));
-  }, [fetchTutorials]);
-
-  useEffect(() => {
-    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-  }, [searchHistory]);
-
-  useEffect(() => {
-    localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
-  }, [recentlyViewed]);
-
-  useEffect(() => {
-    localStorage.setItem(
-      "bookmarkedTutorials",
-      JSON.stringify(bookmarkedTutorials)
+    if (!res.ok)
+      throw new Error((await res.json()).message || "Failed to fetch");
+    const data = await res.json();
+    setTutorials((prev) =>
+      append ? [...prev, ...data.tutorials] : data.tutorials
     );
-  }, [bookmarkedTutorials]);
+    setNextPageToken(data.nextPageToken);
+    setSearchHistory((prev) =>
+      [objectName, ...prev.filter((term) => term !== objectName)].slice(0, 5)
+    );
+  } catch (e) {
+    setError(e.message);
+    if (!append) setTutorials([]);
+    setNextPageToken(null);
+  } finally {
+    setLoading(false);
+  }
+}, [setError, setTutorials, setNextPageToken, setSearchHistory]);
 
-  const fetchTutorials = async (objectName, pageToken = "", append = false) => {
-    if (!objectName.trim()) {
-      setError("Please enter a search term or select a category.");
-      setTutorials([]);
-      setNextPageToken(null);
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(
-        `https://refixly.onrender.com/api/tutorials/${encodeURIComponent(
-          objectName
-        )}?pageToken=${pageToken}`
-      );
-      if (!res.ok)
-        throw new Error((await res.json()).message || "Failed to fetch");
-      const data = await res.json();
-      setTutorials((prev) =>
-        append ? [...prev, ...data.tutorials] : data.tutorials
-      );
-      setNextPageToken(data.nextPageToken);
-      setSearchHistory((prev) =>
-        [objectName, ...prev.filter((term) => term !== objectName)].slice(0, 5)
-      );
-    } catch (e) {
-      setError(e.message);
-      if (!append) setTutorials([]);
-      setNextPageToken(null);
-    } finally {
-      setLoading(false);
-    }
-  },
-  [setError, setTutorials, setNextPageToken, setSearchHistory]
-);
+ 
 
   const handleSearch = (e) => {
     e.preventDefault();
