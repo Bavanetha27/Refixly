@@ -28,10 +28,13 @@ const Home = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 1200,
-      once: false,
-      mirror: true,
-    });
+  duration: 1200,
+  once: true,
+  mirror: true,
+
+});
+
+
   }, []);
 
   const features = [
@@ -78,7 +81,8 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-gray-900 pt-20 overflow-x-hidden">
+    <div className="bg-[#f8fafc] dark:bg-gray-900 pt-20 overflow-y-hidden">
+
   {/* Animated Background Elements */}
   <div className="absolute inset-0 overflow-hidden">
     {/* Remove animated background blobs */}
